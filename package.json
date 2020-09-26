@@ -1,26 +1,27 @@
 {
-  "name": "chat-group",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "firebase": "^7.21.1",
-    "firebase-admin": "^9.2.0",
-    "firechat": "^3.0.1",
-    "next": "9.5.3",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  },
-  "devDependencies": {
-    "eslint": "^7.9.0",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "eslint-plugin-react": "^7.21.2",
-    "eslint-plugin-react-hooks": "^4.1.2"
-  }
+	"name": "chat-group",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"firebase": "^7.21.1",
+		"firebase-admin": "^9.2.0",
+		"firechat": "^3.0.1",
+		"next": "9.5.3",
+		"react": "16.13.1",
+		"react-dom": "16.13.1"
+	},
+	"devDependencies": {
+		"eslint": "^7.9.0",
+		"eslint-config-standard": "^14.1.1",
+		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-promise": "^4.2.1",
+		"eslint-plugin-node": "^11.1.1",
+		"eslint-plugin-react": "^7.21.2",
+		"eslint-plugin-standard": "^4.0.1"
+	}
 }
