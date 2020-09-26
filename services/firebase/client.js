@@ -30,7 +30,7 @@ export const loginWithGoogle = () => {
 }
 
 export const onAuthStateChanged = (onChange) => {
-  firebase.auth.onAuthStateChanged((user) => {
+  firebase.auth().onAuthStateChanged((user) => {
     const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null
 
     onChange(normalizedUser)
