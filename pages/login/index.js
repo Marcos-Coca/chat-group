@@ -18,7 +18,7 @@ function Login () {
   }
 
   return <div>
-    <div className="bg-gray-200" onClick={handleGithubClick}>Login with GitHub</div>
+    <button className="bg-gray-200" onClick={handleGithubClick}>Login with GitHub</button>
     <button onClick={handleTwitterClick} >Login with Twitter</button>
     <button onClick={handleGoogleClick} >Login with Google</button>
   </div>
