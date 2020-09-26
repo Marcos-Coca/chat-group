@@ -28,3 +28,22 @@ export const loginWithGoogle = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   return firebase.auth.signInWithPopup(googleProvider)
 }
+
+export const onAuthStateChanged = (onChange) => {
+  firebase.auth.onAuthStateChanged((user) => {
+    const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null
+
+    onChange(normalizedUser)
+  })
+}
+
+const mapUserFromFirebaseAuthToUser = (user) => {
+  const { displayName, email, photoURL, uid } = user
+
+  return {
+    id: uid,
+    avatar: photoURL,
+    userName: displayName,
+    email
+  }
+}
