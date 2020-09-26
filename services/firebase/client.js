@@ -1,4 +1,5 @@
-import { initializeApp, auth } from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyAlEhCkRtneOKFjjbvdgl2p-IZ1Z5-h9dM',
@@ -11,9 +12,19 @@ const firebaseConfig = {
   measurementId: 'G-MGBQGBL9LQ'
 }
 
-initializeApp(firebaseConfig)
+firebase.apps.length === 0 && firebase.initializeApp(firebaseConfig)
 
 export const loginWithGitHub = () => {
-  const githubProvider = new auth.GithubAuthProvider()
-  return auth().signInWithPopup(githubProvider)
+  const githubProvider = new firebase.auth.GithubAuthProvider()
+  return firebase.auth().signInWithPopup(githubProvider)
+}
+
+export const loginWithTwitter = () => {
+  const twitterProvider = new firebase.auth.TwitterAuthProvider()
+  return firebase.auth.signInWithPopup(twitterProvider)
+}
+
+export const loginWithGoogle = () => {
+  const googleProvider = new firebase.auth.GoogleAuthProvider()
+  return firebase.auth.signInWithPopup(googleProvider)
 }
