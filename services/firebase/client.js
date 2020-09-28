@@ -36,26 +36,18 @@ export const loginWithFacebook = () => {
 
 export const loginWithEmail = (email) => {
   const actionCodeSettings = {
-    url: 'http://localhost:3000/login',
+    url: 'http://localhost:3000/login/email',
     handleCodeInApp: true
   }
   return firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
 }
 
-export const testEmailLogin = () => {
-  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-    var email = window.localStorage.getItem('emailForSignIn')
-    if (!email) {
-      email = window.prompt('Please provide your email for confirmation')
-    }
-    firebase.auth().signInWithEmailLink(email, window.location.href)
-      .then(function () {
-        window.localStorage.removeItem('emailForSignIn')
-      })
-      .catch(function () {
+export const isSignInWithEmailLink = (url) => {
+  return firebase.auth().isSignInWithEmailLink(url)
+}
 
-      })
-  }
+export const signInWithEmailLink = (email, href) => {
+  return firebase.auth().signInWithEmailLink(email, href)
 }
 
 export const onAuthStateChanged = (onChange) => {
