@@ -21,12 +21,41 @@ export const loginWithGitHub = () => {
 
 export const loginWithTwitter = () => {
   const twitterProvider = new firebase.auth.TwitterAuthProvider()
-  return firebase.auth.signInWithPopup(twitterProvider)
+  return firebase.auth().signInWithPopup(twitterProvider)
 }
 
 export const loginWithGoogle = () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
-  return firebase.auth.signInWithPopup(googleProvider)
+  return firebase.auth().signInWithPopup(googleProvider)
+}
+
+export const loginWithFacebook = () => {
+  const facebookProvider = new firebase.auth.FacebookAuthProvider()
+  return firebase.auth().signInWithPopup(facebookProvider)
+}
+
+export const loginWithEmail = (email) => {
+  const actionCodeSettings = {
+    url: 'http://localhost:3000/login',
+    handleCodeInApp: true
+  }
+  return firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+}
+
+export const testEmailLogin = () => {
+  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+    var email = window.localStorage.getItem('emailForSignIn')
+    if (!email) {
+      email = window.prompt('Please provide your email for confirmation')
+    }
+    firebase.auth().signInWithEmailLink(email, window.location.href)
+      .then(function () {
+        window.localStorage.removeItem('emailForSignIn')
+      })
+      .catch(function () {
+
+      })
+  }
 }
 
 export const onAuthStateChanged = (onChange) => {

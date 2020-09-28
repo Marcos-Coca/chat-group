@@ -1,10 +1,17 @@
+:root {
+  --main-color: #3c366b;
+  --second-color: #1a202c;
+  --font-main-color: #fff;
+  --font-second-color: #a6b6be;
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background: #1a202c;
+  background: var(--second-color);
 }
 
 a {
