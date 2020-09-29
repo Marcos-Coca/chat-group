@@ -1,30 +1,51 @@
-import useLogin from 'hooks/useLogin'
-import { LOGIN_OPTIONS } from 'utils/constants'
+import { useState } from 'react'
 
 import styles from './styles'
-import Email from 'components/Icons/Email'
-import Google from 'components/Icons/Google'
-import GitHub from 'components/Icons/GitHub'
-import Twitter from 'components/Icons/Twitter'
-import Facebook from 'components/Icons/Facebook'
+import useLogin from 'hooks/useLogin'
+import EmailPopUp from 'components/EmailPopUp'
 
-export const ICONS = {
-  [LOGIN_OPTIONS.GitHub]: GitHub,
-  [LOGIN_OPTIONS.Google]: Google,
-  [LOGIN_OPTIONS.Twitter]: Twitter,
-  [LOGIN_OPTIONS.Facebook]: Facebook,
-  [LOGIN_OPTIONS.Email]: Email
-}
+import { ICONS } from 'utils/constants/Icons'
+import { LOGIN_OPTIONS } from 'utils/constants/loginOptions'
 
 function LoginButton ({ socialMedia, fill }) {
   const Icon = ICONS[socialMedia]
-  const handleClick = useLogin(socialMedia)
+  const login = useLogin(socialMedia)
+  const [showEmailModal, setShowEmailModal] = useState(false)
 
-  return <button onClick={handleClick}>
-    <Icon fill={fill} height={24} width={24} />
-    <span>Sign in with {socialMedia}</span>
+  const handleClick = () => {
+    const isEmail = socialMedia === LOGIN_OPTIONS.Email
+    isEmail ? setShowEmailModal(true) : loginWithSocialMedia()
+  }
+
+  const loginWithSocialMedia = () => {
+    login().then((user) => {
+      console.log(user)
+    })
+      .catch((err) => console.log(err))
+  }
+
+  const handleEmailClick = (e, email) => {
+    e.preventDefault()
+    login(email)
+      .then(() => {
+        window.localStorage.setItem('emailForSignIn', email)
+      })
+      .catch((err) => console.log(err))
+  }
+
+  return <>
+    <button onClick={handleClick}>
+      <Icon fill={fill} height={24} width={24} />
+      <span>Sign in with {socialMedia}</span>
+    </button>
+    <EmailPopUp
+      title="Sign in with email"
+      text="Enter the email address associated with your account, and we'll send a magic link to your inbox."
+      show={showEmailModal}
+      setShow={setShowEmailModal}
+      handleSubmit={handleEmailClick} />
     <style jsx>{styles}</style>
-  </button>
+  </>
 }
 
 export default LoginButton

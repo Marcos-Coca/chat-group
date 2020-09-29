@@ -1,8 +1,9 @@
 
 import styles from './styles'
-import { LOGIN_OPTIONS } from 'utils/constants'
 import LoginButton from 'components/LoginButton'
 import useRedirectOnAuth from 'hooks/useRedirectOnAuth'
+
+import { LOGIN_OPTIONS } from 'utils/constants/loginOptions'
 
 function Login () {
   useRedirectOnAuth()

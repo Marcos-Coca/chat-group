@@ -1,32 +1,33 @@
 import { useState } from 'react'
-function EmailPopUp ({ text, setValue }) {
+function EmailPopUp ({ text, title, handleSubmit, show, setShow }) {
   const [email, setEmail] = useState('')
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    setValue(email)
-  }
 
   const handleChange = (e) => {
     const value = e.target.value
     setEmail(value)
   }
 
-  return <div>
+  return <>
+    {show &&
+  <div>
+    <h3>{title}</h3>
     <span>{text}</span>
     <form onSubmit={handleSubmit}>
-      <input type="email" name="" id="" value={email} onChange={handleChange}/>
+      <input type="email" value={email} onChange={handleChange}/>
       <button>Send</button>
     </form>
+    <button onClick={() => setShow(false)} >Close</button>
     <style jsx>{`
         div{
             position:absolute;
-            width:40px;
+            width:400px;
             height:300px;
             background:red;
         }
         `}</style>
   </div>
+    }
+  </>
 }
 
 export default EmailPopUp
