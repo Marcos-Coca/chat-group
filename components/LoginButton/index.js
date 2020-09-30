@@ -1,15 +1,15 @@
 import { useState } from 'react'
 
 import styles from './styles'
-import useLogin from 'hooks/useLogin'
 import EmailPopUp from 'components/EmailPopUp'
 
+import { LOGIN } from 'utils/constants/Login'
 import { ICONS } from 'utils/constants/Icons'
 import { LOGIN_OPTIONS } from 'utils/constants/loginOptions'
 
 function LoginButton ({ socialMedia, fill }) {
   const Icon = ICONS[socialMedia]
-  const login = useLogin(socialMedia)
+  const login = LOGIN[socialMedia]
   const [showEmailModal, setShowEmailModal] = useState(false)
 
   const handleClick = () => {
@@ -24,11 +24,11 @@ function LoginButton ({ socialMedia, fill }) {
       .catch((err) => console.log(err))
   }
 
-  const handleEmailClick = (e, email) => {
-    e.preventDefault()
+  const handleEmailClick = (email) => {
     login(email)
       .then(() => {
         window.localStorage.setItem('emailForSignIn', email)
+        alert(`We just emailed a confirmation link to ${email}. Click the link to complete your account set-up.`)
       })
       .catch((err) => console.log(err))
   }
@@ -43,7 +43,7 @@ function LoginButton ({ socialMedia, fill }) {
       text="Enter the email address associated with your account, and we'll send a magic link to your inbox."
       show={showEmailModal}
       setShow={setShowEmailModal}
-      handleSubmit={handleEmailClick} />
+      onSubmit={handleEmailClick} />
     <style jsx>{styles}</style>
   </>
 }
