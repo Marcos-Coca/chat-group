@@ -1,8 +1,7 @@
-
 import css from 'styled-jsx/css'
 
 export default css`
-button {
+  button {
     width: 100%;
     margin: auto;
     border: none;
@@ -10,7 +9,7 @@ button {
     display: flex;
     padding: 12px;
     cursor: pointer;
-    min-width:230px;
+    min-width: 230px;
     font-weight: 600;
     align-items: center;
     font-size: 1.125rem;
@@ -22,9 +21,9 @@ button {
     margin-left: 12px;
   }
 
-  button:nth-of-type(1){
-    grid-area:email;
-    background:#fff;
+  button:nth-of-type(1) {
+    grid-area: email;
+    background: #fff;
   }
 
   button:nth-of-type(2) {
@@ -42,10 +41,16 @@ button {
     color: var(--font-main-color);
   }
 
-  button:nth-of-type(5){
-    grid-area:facebook;
+  button:nth-of-type(5) {
+    grid-area: facebook;
     background: #1877f2;
     color: var(--font-main-color);
-
   }
-  `
+
+  @media (max-width: 650px) {
+    button {
+      max-width: 300px;
+      margin: 10px auto;
+    }
+  }
+`

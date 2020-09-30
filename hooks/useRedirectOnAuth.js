@@ -10,5 +10,7 @@ function useRedirectOnAuth () {
   useEffect(() => {
     user && router.replace('/')
   }, [user])
+
+  return user
 }
 export default useRedirectOnAuth
