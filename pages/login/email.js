@@ -2,13 +2,13 @@ import Router from 'next/router'
 import { useEffect, useState } from 'react'
 
 import EmailPopUp from 'components/EmailPopUp'
-import { isSignInWithEmailLink, signInWithEmailLink } from 'services/firebase/client'
+import { isSignInWithEmailLink, signInWithEmailLink } from 'services/auth'
 
 import useRedirectOnAuth from 'hooks/useRedirectOnAuth'
 function Email () {
+  useRedirectOnAuth()
   const [email, setEmail] = useState()
   const [tries, setTries] = useState(0)
-  useRedirectOnAuth()
 
   const onSubmit = (formEmail) => {
     signInWithEmailLink(formEmail, window.location.href)
@@ -17,18 +17,16 @@ function Email () {
   }
 
   useEffect(() => {
-    if (email || tries === 3) {
-      Router.replace('/login')
-    }
-  }, [email, tries])
+    tries === 3 && Router.replace('/login')
+  }, [tries])
 
   useEffect(() => {
     const emailStored = window.localStorage.getItem('emailForSignIn')
+    setEmail(emailStored)
 
-    if (emailStored) {
-      signInWithEmailLink(emailStored, window.location.href)
+    if (email) {
+      signInWithEmailLink(email, window.location.href)
         .then(() => window.localStorage.removeItem('emailForSignIn'))
-        .then(() => setEmail(emailStored))
         .catch((err) => console.log(err))
     }
   }, [])

@@ -1,9 +1,8 @@
-/* eslint-disable space-before-function-paren */
 import { useState } from 'react'
 
 import styles from './styles'
 
-function EmailPopUp({ text, title, onSubmit, show, setShow, wrongMessage, isWrong }) {
+function EmailPopUp ({ text, title, onSubmit, show, setShow, wrongMessage, isWrong }) {
   const [email, setEmail] = useState('')
 
   const handleChange = (e) => {

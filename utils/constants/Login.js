@@ -7,7 +7,7 @@ import {
   loginWithTwitter,
   loginWithFacebook,
   loginWithEmail
-} from 'services/firebase/client'
+} from 'services/auth'
 
 export const LOGIN = {
   [LOGIN_OPTIONS.GitHub]: loginWithGitHub,
