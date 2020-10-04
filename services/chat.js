@@ -8,21 +8,33 @@ export function sendMessage (roomId, message, user) {
 
   roomRef.add({
     user,
-    message
+    message,
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date())
   })
 }
 
-export function getMessages (roomId) {
-  const roomRef = db.collection('rooms').doc(roomId).collection('messages')
-  return roomRef
+export function getMessages ({ startAfter, roomId }) {
+  const messagesRef = db.collection('rooms').doc(roomId)
+    .collection('messages')
     .limit(1)
-    .get()
-    .then(function (querySnapshot) {
-      querySnapshot.forEach(function (doc) {
-        console.log(doc.id, ' => ', doc.data())
-      })
-    })
-    .catch(function (error) {
-      console.log('Error getting documents: ', error)
-    })
+    .orderBy('createdAt', 'desc')
+    .startAfter(startAfter)
+
+  return messagesRef.get().then((documentSnapshots) => {
+    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
+    const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
+    return { lastVisible, messages }
+  })
+}
+
+function mapMessageFromFirebase (doc) {
+  const id = doc.id
+  const data = doc.data()
+  const { createdAt } = data
+
+  return {
+    id,
+    ...data,
+    createdAt: createdAt.toDate()
+  }
 }

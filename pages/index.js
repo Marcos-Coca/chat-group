@@ -1,15 +1,16 @@
 
 import { useEffect, useState } from 'react'
 
-import { sendMessage, getMessages } from 'services/chat'
+import useMessages from 'hooks/useMessages'
+import { sendMessage } from 'services/chat'
 import isAuthenticated from 'hoc/isAuthenticated'
 
 function Home ({ user }) {
   const [message, setMessage] = useState('')
+  const { setPage, messages } = useMessages('rRejkdgXIWUCxz3SqYH3')
   useEffect(() => {
-    console.log(user)
-    getMessages('rRejkdgXIWUCxz3SqYH3')
-  }, [])
+    // messages.map((doc) => console.log(doc))
+  }, [messages])
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -25,6 +26,7 @@ function Home ({ user }) {
       <input type="text" value={message} onChange={handleChange} placeholder="sendMessage" />
       <input type="submit" />
     </form>
+    <button onClick={() => setPage(prevPage => prevPage + 1)}> Next Page</button>
   </div>
 }
 
