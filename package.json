@@ -9,8 +9,6 @@
 	},
 	"dependencies": {
 		"firebase": "^7.21.1",
-		"firebase-admin": "^9.2.0",
-		"firechat": "^3.0.1",
 		"next": "9.5.3",
 		"react": "16.13.1",
 		"react-dom": "16.13.1"

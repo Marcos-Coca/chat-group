@@ -1,5 +1,5 @@
-import firebase from './client'
 import 'firebase/auth'
+import firebase from './client'
 
 export const loginWithGitHub = () => {
   const githubProvider = new firebase.auth.GithubAuthProvider()
@@ -38,7 +38,7 @@ export const signInWithEmailLink = (email, href) => {
 }
 
 export const onAuthStateChanged = (onChange) => {
-  firebase.auth().onAuthStateChanged((user) => {
+  return firebase.auth().onAuthStateChanged((user) => {
     const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null
 
     onChange(normalizedUser)
@@ -48,6 +48,7 @@ export const onAuthStateChanged = (onChange) => {
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { displayName, email, photoURL, uid } = user
 
+  console.log(user)
   return {
     id: uid,
     avatar: photoURL,

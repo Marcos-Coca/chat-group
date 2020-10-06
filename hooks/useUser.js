@@ -6,7 +6,9 @@ function useUser () {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    onAuthStateChanged(setUser)
+    const unsubcribe = onAuthStateChanged(setUser)
+
+    return () => unsubcribe()
   }, [])
 
   return user

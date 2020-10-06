@@ -3,10 +3,10 @@ import 'firebase/firestore'
 
 const db = firebase.firestore()
 
-export function sendMessage (roomId, message, user) {
+export function sendMessage ({ roomId, message, user }) {
   const roomRef = db.collection('rooms').doc(roomId).collection('messages')
 
-  roomRef.add({
+  return roomRef.add({
     user,
     message,
     createdAt: firebase.firestore.Timestamp.fromDate(new Date())
@@ -16,7 +16,7 @@ export function sendMessage (roomId, message, user) {
 export function getMessages ({ startAfter, roomId }) {
   const messagesRef = db.collection('rooms').doc(roomId)
     .collection('messages')
-    .limit(1)
+    .limit(25)
     .orderBy('createdAt', 'desc')
     .startAfter(startAfter)
 
@@ -37,4 +37,15 @@ function mapMessageFromFirebase (doc) {
     ...data,
     createdAt: createdAt.toDate()
   }
+}
+
+export function getLiveMessages (roomId, callback) {
+  return db.collection('rooms').doc(roomId)
+    .collection('messages')
+    .limit(1)
+    .orderBy('createdAt', 'desc')
+    .onSnapshot((snapshot) => {
+      const newMessages = snapshot.docs.map(mapMessageFromFirebase)
+      callback(newMessages)
+    })
 }
