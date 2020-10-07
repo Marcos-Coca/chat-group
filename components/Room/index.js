@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import belongsRoom from 'hoc/belongsRoom'
 import Message from 'components/Message'
 import useMessages from 'hooks/useMessages'
 import { sendMessage } from 'services/chat'
@@ -30,4 +31,4 @@ function Room ({ roomId, user }) {
   )
 }
 
-export default Room
+export default belongsRoom(Room)

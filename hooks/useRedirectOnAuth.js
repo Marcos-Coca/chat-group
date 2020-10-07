@@ -8,7 +8,7 @@ function useRedirectOnAuth () {
   const router = useRouter()
 
   useEffect(() => {
-    user && router.replace('/')
+    user && router.replace('rooms/rRejkdgXIWUCxz3SqYH3')
   }, [user])
 
   return user

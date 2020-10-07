@@ -48,7 +48,6 @@ export const onAuthStateChanged = (onChange) => {
 const mapUserFromFirebaseAuthToUser = (user) => {
   const { displayName, email, photoURL, uid } = user
 
-  console.log(user)
   return {
     id: uid,
     avatar: photoURL,

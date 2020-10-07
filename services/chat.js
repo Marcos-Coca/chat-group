@@ -14,7 +14,9 @@ export function sendMessage ({ roomId, message, user }) {
 }
 
 export function getMessages ({ startAfter, roomId }) {
-  const messagesRef = db.collection('rooms').doc(roomId)
+  const messagesRef = db
+    .collection('rooms')
+    .doc(roomId)
     .collection('messages')
     .limit(25)
     .orderBy('createdAt', 'desc')
@@ -40,7 +42,9 @@ function mapMessageFromFirebase (doc) {
 }
 
 export function getLiveMessages (roomId, callback) {
-  return db.collection('rooms').doc(roomId)
+  return db
+    .collection('rooms')
+    .doc(roomId)
     .collection('messages')
     .limit(1)
     .orderBy('createdAt', 'desc')
@@ -48,4 +52,13 @@ export function getLiveMessages (roomId, callback) {
       const newMessages = snapshot.docs.map(mapMessageFromFirebase)
       callback(newMessages)
     })
+}
+
+export function getUserRooms (userId) {
+  return db
+    .collection('users')
+    .doc(userId)
+    .get()
+    .then((doc) => doc.data())
+    .then((user) => user.rooms)
 }

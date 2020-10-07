@@ -5,16 +5,16 @@ import useUser from 'hooks/useUser'
 import Loader from 'components/Loader'
 
 // eslint-disable-next-line react/display-name
-const isAuthenticated = (Page) => () => {
+const isAuthenticated = (Page) => (props) => {
   const user = useUser()
   const router = useRouter()
 
   useEffect(() => {
-    user === null && router.push('/login')
+    user === null && router.replace('/login')
   }, [user])
 
   return <>
-    {user ? <Page user={user}/>
+    {user ? <Page user={user}{...props}/>
       : <div>
         <Loader/>
       </div>}
