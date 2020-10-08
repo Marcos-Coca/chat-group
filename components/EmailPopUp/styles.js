@@ -79,28 +79,6 @@ export default css`
     border-color: var(--main-color);
   }
 
-  button {
-    width: 90px;
-    height: 36px;
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    color: var(--main-color);
-    background: var(--font-main-color);
-  }
-
-  button:disabled {
-    opacity: 0.7;
-    cursor: default;
-  }
-
-  button:first-child {
-    background: transparent;
-    color: var(--font-main-color);
-  }
-
   @media(max-width:650px){
       .modal-content{
           height:100vh;

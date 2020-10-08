@@ -24,3 +24,25 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.buttons > * {
+  width: 90px;
+  height: 36px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  color: var(--main-color);
+  background: var(--font-main-color);
+}
+
+.buttons > *:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.buttons > *:first-child {
+  background: transparent;
+  color: var(--font-main-color);
+}

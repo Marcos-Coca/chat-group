@@ -60,5 +60,19 @@ export function getUserRooms (userId) {
     .doc(userId)
     .get()
     .then((doc) => doc.data())
-    .then((user) => user.rooms)
+    .then(({ rooms }) => rooms)
+}
+
+export function addUserToRoom ({ userId, roomId }) {
+  const userRef = db.collection('users').doc(userId)
+
+  userRef.update({
+    rooms: firebase.firestore.FieldValue.arrayUnion(roomId)
+  })
+
+  db.collection('rooms')
+    .doc(roomId)
+    .update({
+      users: firebase.firestore.FieldValue.arrayUnion(userRef)
+    })
 }

@@ -40,7 +40,7 @@ function EmailPopUp ({ text, title, onSubmit, show, setShow, wrongMessage, isWro
                   {wrongMessage}
                 </div>
               )}
-              <div className="modal-buttons">
+              <div className="modal-buttons buttons">
                 <button type="button" onClick={onClose}>Close</button>
                 <button disabled={!email}>Send</button>
               </div>
