@@ -2,8 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import Loader from 'components/Loader'
-import { DEFAULT_ROOM } from 'utils/constants/room'
 import { getRoom } from 'services/chat'
+import { DEFAULT_ROOM } from 'utils/constants/room'
 
 const belongsRoom = (Room) => ({ user, roomId }) => {
   const router = useRouter()
@@ -25,14 +25,14 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
 
   return (
     <>
-      {belongs === undefined ? (
+      {!belongs && !room ? (
         <Loader />
       ) : belongs ? (
         <Room roomId={roomId} user={user} />
       ) : (
         <div className="NotBelongs-Container">
           <div>
-            <h3>You don&apos;t belong to room <b>{room.name}</b></h3>
+            <h3>You don&apos;t belong to room <br/> <b>{room.name}</b></h3>
             <span>Do you want to join?</span>
             <div className="buttons">
               <button onClick={handleCancelClick}>Cancel</button>
@@ -44,7 +44,8 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
       <style jsx>
         {`
           h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            font-weight:normal;
           }
           span {
             font-size: 1.25rem;
@@ -55,9 +56,10 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
             display: flex;
           }
           .NotBelongs-Container > div {
-            width: 40%;
+            width: 50%;
             margin: auto;
             max-width:576px;
+            border-radius:10px;
             text-align: center;
             background: var(--main-color);
           }
