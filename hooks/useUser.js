@@ -14,7 +14,14 @@ function useUser () {
   }, [])
 
   useEffect(() => {
-    auth ? getUser(auth.uid).then((user) => setUser(user)) : setUser(auth)
+    auth
+      ? getUser(auth.uid).then((user) =>
+        setUser({
+          id: auth.uid,
+          ...user
+        })
+      )
+      : setUser(auth)
   }, [auth])
 
   return user

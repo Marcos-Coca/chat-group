@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import belongsRoom from 'hoc/belongsRoom'
 import Message from 'components/Message'
+import belongsRoom from 'hoc/belongsRoom'
 import useMessages from 'hooks/useMessages'
 import { sendMessage } from 'services/chat'
 

@@ -20,7 +20,7 @@ export function addUserToRoom ({ user, roomId }) {
   const updateUser = db.collection('users')
     .doc(user.id)
     .update({
-      users: firebase.firestore.FieldValue.arrayUnion(roomRef)
+      rooms: firebase.firestore.FieldValue.arrayUnion(roomRef)
     })
 
   return Promise.all([updateRoom, updateUser])

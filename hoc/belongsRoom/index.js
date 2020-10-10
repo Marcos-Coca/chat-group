@@ -6,6 +6,8 @@ import { getRoom } from 'services/chat'
 import { addUserToRoom } from 'services/user'
 import { DEFAULT_ROOM } from 'utils/constants/room'
 
+import styles from './styles'
+
 const belongsRoom = (Room) => ({ user, roomId }) => {
   const router = useRouter()
   const [room, setRoom] = useState({})
@@ -15,7 +17,9 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
     if (roomId !== DEFAULT_ROOM) {
       getRoom(roomId).then((room) => {
         const isInRoom = room.users.find(({ id }) => id === user.id)
-        isInRoom ? setBelongs(isInRoom) : setRoom(room)
+
+        !isInRoom && setRoom(room)
+        setBelongs(Boolean(isInRoom))
       })
     } else {
       setBelongs(true)
@@ -25,6 +29,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
   const handleCancelClick = () => router.push('/')
 
   const handleJoinClick = () => {
+    setBelongs()
     addUserToRoom({ user, roomId }).then(() => {
       setBelongs(true)
     })
@@ -32,7 +37,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
 
   return (
     <>
-      {!belongs && !room ? (
+      {belongs === undefined ? (
         <Loader />
       ) : belongs ? (
         <Room roomId={roomId} user={user} />
@@ -48,43 +53,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
           </div>
         </div>
       )}
-      <style jsx>
-        {`
-          h3 {
-            font-size: 1.6rem;
-            font-weight:normal;
-          }
-          span {
-            font-size: 1.25rem;
-          }
-          .NotBelongs-Container {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-          }
-          .NotBelongs-Container > div {
-            width: 50%;
-            margin: auto;
-            max-width:576px;
-            border-radius:10px;
-            text-align: center;
-            background: var(--main-color);
-          }
-
-          .buttons > * {
-            margin: 1.5rem 10px;
-          }
-
-          @media (max-width: 650px) {
-            .NotBelongs-Container > div {
-              width: 100%;
-            }
-            .NotBelongs-Container {
-              background: var(--main-color);
-            }
-          }
-        `}
-      </style>
+      <style jsx>{styles}</style>
     </>
   )
 }
