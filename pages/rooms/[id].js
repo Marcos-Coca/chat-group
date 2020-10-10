@@ -1,4 +1,3 @@
-
 import Room from 'components/Room'
 import isAuthenticated from 'hoc/isAuthenticated'
 
