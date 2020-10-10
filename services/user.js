@@ -10,17 +10,18 @@ export const getUser = (userId) => {
 export function addUserToRoom ({ user, roomId }) {
   const roomRef = db.collection('rooms').doc(roomId)
 
-  roomRef.update({
+  const updateRoom = roomRef.update({
     users: firebase.firestore.FieldValue.arrayUnion({
       id: user.id,
       userName: user.userName,
       avatar: user.avatar
     })
   })
-
-  db.collection('users')
+  const updateUser = db.collection('users')
     .doc(user.id)
     .update({
       users: firebase.firestore.FieldValue.arrayUnion(roomRef)
     })
+
+  return Promise.all([updateRoom, updateUser])
 }

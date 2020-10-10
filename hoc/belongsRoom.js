@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 import Loader from 'components/Loader'
 import { getRoom } from 'services/chat'
+import { addUserToRoom } from 'services/user'
 import { DEFAULT_ROOM } from 'utils/constants/room'
 
 const belongsRoom = (Room) => ({ user, roomId }) => {
@@ -23,6 +24,12 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
 
   const handleCancelClick = () => router.push('/')
 
+  const handleJoinClick = () => {
+    addUserToRoom({ user, roomId }).then(() => {
+      setBelongs(true)
+    })
+  }
+
   return (
     <>
       {!belongs && !room ? (
@@ -36,7 +43,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
             <span>Do you want to join?</span>
             <div className="buttons">
               <button onClick={handleCancelClick}>Cancel</button>
-              <button>Join</button>
+              <button onClick={handleJoinClick}>Join</button>
             </div>
           </div>
         </div>
