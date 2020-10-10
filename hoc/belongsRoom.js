@@ -2,19 +2,19 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import Loader from 'components/Loader'
-import { getUserRooms } from 'services/chat'
 import { DEFAULT_ROOM } from 'utils/constants/room'
+import { getRoom } from 'services/chat'
 
-// eslint-disable-next-line react/display-name
 const belongsRoom = (Room) => ({ user, roomId }) => {
   const router = useRouter()
+  const [room, setRoom] = useState({})
   const [belongs, setBelongs] = useState()
 
   useEffect(() => {
     if (roomId !== DEFAULT_ROOM) {
-      getUserRooms(user.id).then((rooms) => {
-        const isRoom = rooms.includes(roomId)
-        setBelongs(isRoom)
+      getRoom(roomId).then((room) => {
+        const isInRoom = room.users.find(({ id }) => id === user.id)
+        isInRoom ? setBelongs(isInRoom) : setRoom(room)
       })
     } else {
       setBelongs(true)
@@ -32,7 +32,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
       ) : (
         <div className="NotBelongs-Container">
           <div>
-            <h3>You don&apos;t belong to this room</h3>
+            <h3>You don&apos;t belong to room <b>{room.name}</b></h3>
             <span>Do you want to join?</span>
             <div className="buttons">
               <button onClick={handleCancelClick}>Cancel</button>

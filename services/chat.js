@@ -54,25 +54,28 @@ export function getLiveMessages (roomId, callback) {
     })
 }
 
-export function getUserRooms (userId) {
+export function getRoom (roomId) {
   return db
-    .collection('users')
-    .doc(userId)
+    .collection('rooms')
+    .doc(roomId)
     .get()
     .then((doc) => doc.data())
-    .then(({ rooms }) => rooms)
 }
 
-export function addUserToRoom ({ userId, roomId }) {
-  const userRef = db.collection('users').doc(userId)
+export function addUserToRoom ({ user, roomId }) {
+  const roomRef = db.collection('rooms').doc(roomId)
 
-  userRef.update({
-    rooms: firebase.firestore.FieldValue.arrayUnion(roomId)
+  roomRef.update({
+    users: firebase.firestore.FieldValue.arrayUnion({
+      id: user.id,
+      userName: user.userName,
+      avatar: user.avatar
+    })
   })
 
-  db.collection('rooms')
-    .doc(roomId)
+  db.collection('users')
+    .doc(user.id)
     .update({
-      users: firebase.firestore.FieldValue.arrayUnion(userRef)
+      users: firebase.firestore.FieldValue.arrayUnion(roomRef)
     })
 }
