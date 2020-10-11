@@ -16,21 +16,26 @@ const isAuthenticated = (Page) => (props) => {
   return (
     <>
       {user ? (
-        <>
+        <div className="container">
           <Aside/>
           <Page user={user} {...props} />
-        </>
+        </div>
       ) : (
-        <div>
+        <div className="loader">
           <Loader />
         </div>
       )}
       <style jsx>{`
-        div {
+        .loader {
           height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
+        }
+
+        .container{
+          display:flex;
+          height:100vh;
         }
       `}</style>
     </>

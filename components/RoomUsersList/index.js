@@ -12,11 +12,28 @@ function RoomUsersList ({ roomId }) {
   }, [])
 
   return (
-    <ul>
-      {users.map((user) => (
-        <RoomUser key={user.id} user={user} />
-      ))}
-    </ul>
+    <div>
+      <h4>Members</h4>
+      <ul>
+        {users.map((user) => (
+          <RoomUser key={user.id} user={user} />
+        ))}
+      </ul>
+      <style jsx>{`
+          div{
+              height:85%;
+          }
+          h4{
+              text-transform:uppercase;
+          }
+        ul {
+          padding: 0;
+          height:85%;
+          overflow-y: hidden;
+          scrollbar-width: none;
+        }
+      `}</style>
+    </div>
   )
 }
 export default RoomUsersList
