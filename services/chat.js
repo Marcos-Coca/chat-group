@@ -62,7 +62,7 @@ export function getRoom (roomId) {
     .then((doc) => doc.data())
 }
 
-export function getLiveUserRoom (roomId, callback) {
+export function getLiveRoomUsers (roomId, callback) {
   return db.collection('rooms').doc(roomId).onSnapshot(function (snapshot) {
     const users = snapshot.data().users
 
