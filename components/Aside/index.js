@@ -1,44 +1,14 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
-import { getRoom } from 'services/chat'
+import RoomAside from 'components/RoomAside'
 
-function Aside ({ children }) {
+function Aside () {
   const router = useRouter()
-  const [room, setRoom] = useState()
+  const roomId = router.query.id
 
-  useEffect(() => {
-    const roomId = router.query.id
-    getRoom(roomId).then((room) => {
-      setRoom(room)
-    })
-  }, [])
-
-  return <div>
-    {room &&
-    <div>
-      <h3>{room.name}</h3>
-      <p>{room.description}</p>
-
-      {
-        room.users.map(user => <ul key={user.id}>
-          <img src={user.avatar}/>
-          <span>{user.userName}</span>
-        </ul>)
-      }
-
-    </div>
-    }
-    {children}
-
-    <style jsx>{`
-        img{
-            height:50px;
-            width:50px;
-        }
-
-        `}</style>
-  </div>
+  return <aside>
+    <RoomAside roomId={roomId} />
+  </aside>
 }
 
 export default Aside

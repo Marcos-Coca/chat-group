@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import RoomUser from 'components/RoomUser'
 import { getLiveRoomUsers } from 'services/chat'
 
-function RoomUsersLists ({ roomId }) {
+function RoomUsersList ({ roomId }) {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -11,6 +11,12 @@ function RoomUsersLists ({ roomId }) {
     return () => unsuscribe()
   }, [])
 
-  return users.map((user) => <RoomUser key={user.id} user={user} />)
+  return (
+    <ul>
+      {users.map((user) => (
+        <RoomUser key={user.id} user={user} />
+      ))}
+    </ul>
+  )
 }
-export default RoomUsersLists
+export default RoomUsersList
