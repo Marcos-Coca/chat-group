@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Layout from 'components/Layout'
+import Aside from 'components/Aside'
 import useUser from 'hooks/useUser'
 import Loader from 'components/Loader'
 
@@ -16,9 +16,10 @@ const isAuthenticated = (Page) => (props) => {
   return (
     <>
       {user ? (
-        <Layout>
+        <>
+          <Aside/>
           <Page user={user} {...props} />
-        </Layout>
+        </>
       ) : (
         <div>
           <Loader />
