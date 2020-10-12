@@ -59,7 +59,16 @@ export function getRoom (roomId) {
     .collection('rooms')
     .doc(roomId)
     .get()
-    .then((doc) => doc.data())
+    .then(mapRoomFromFirebase)
+}
+
+function mapRoomFromFirebase (doc) {
+  const id = doc.id
+  const room = doc.data()
+  return {
+    id,
+    ...room
+  }
 }
 
 export function getLiveRoomUsers (roomId, callback) {

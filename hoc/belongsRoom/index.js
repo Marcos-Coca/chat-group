@@ -14,16 +14,16 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
   const [belongs, setBelongs] = useState()
 
   useEffect(() => {
-    if (roomId !== DEFAULT_ROOM) {
-      getRoom(roomId).then((room) => {
-        const isInRoom = room.users.find(({ id }) => id === user.id)
+    getRoom(roomId).then((room) => {
+      setRoom(room)
 
-        !isInRoom && setRoom(room)
+      if (roomId !== DEFAULT_ROOM) {
+        const isInRoom = room.users.find(({ id }) => id === user.id)
         setBelongs(Boolean(isInRoom))
-      })
-    } else {
-      setBelongs(true)
-    }
+      } else {
+        setBelongs(true)
+      }
+    })
   }, [])
 
   const handleCancelClick = () => router.push('/')
@@ -40,7 +40,7 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
       {belongs === undefined ? (
         <Loader />
       ) : belongs ? (
-        <Room roomId={roomId} user={user} />
+        <Room room={room} user={user} />
       ) : (
         <div className="NotBelongs-Container">
           <div>

@@ -27,6 +27,7 @@ function RoomAside ({ roomId }) {
           width: 30px;
           height: 25px;
           border: none;
+          outline: none;
           cursor: pointer;
           position: relative;
           margin-right: 0.5rem;
