@@ -7,7 +7,7 @@ function Aside () {
   const roomId = router.query.id
 
   return <aside>
-    <div className="aside-content">
+    <div className="Aside-Content">
       {roomId && <RoomAside roomId={roomId} />}
     </div>
     <style jsx>{`
@@ -17,7 +17,7 @@ function Aside () {
           background: var(--dark-main-color);
         }
 
-        .aside-content{
+        .Aside-Content{
           width:85%;
           height:90%;
           margin:auto;

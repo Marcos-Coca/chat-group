@@ -1,0 +1,22 @@
+.User {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+
+.User-Name {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--font-second-color);
+}
+
+.User-Avatar-Container {
+  height: 50px;
+  overflow: hidden;
+  margin-right: 1rem;
+  border-radius: 5px;
+}
+.User-Avatar-Container img {
+  height: 100%;
+  object-fit: contain;
+}
