@@ -33,6 +33,11 @@ input,
 button {
   outline: none;
 }
+
+button {
+  cursor: pointer;
+}
+
 input[type='text'] {
   border: none;
   font-size: 1.25rem;
