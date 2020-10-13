@@ -33,21 +33,15 @@ export default css`
   }
   form input[type='text'] {
     width: 100%;
-    border: none;
     padding: 1rem;
-    outline: none;
     font-size: 1.25rem;
     background: transparent;
-    color: var(--font-main-color);
   }
-  form input[type='text']::placeholder {
-    color: var(--font-second-color);
-  }
+
   form button {
     width: 40px;
     height: 40px;
     border: none;
-    outline: none;
     cursor: pointer;
     border-radius: 5px;
     background: transparent;

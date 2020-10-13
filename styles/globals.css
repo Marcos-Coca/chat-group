@@ -28,3 +28,16 @@ a {
 * {
   box-sizing: border-box;
 }
+
+input,
+button {
+  outline: none;
+}
+input[type='text'] {
+  border: none;
+  font-size: 1.25rem;
+  color: var(--font-main-color);
+}
+input[type='text']::placeholder {
+  color: var(--font-second-color);
+}
