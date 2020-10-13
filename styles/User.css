@@ -2,6 +2,7 @@
   display: flex;
   list-style: none;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .User-Name {
@@ -11,12 +12,12 @@
 }
 
 .User-Avatar-Container {
-  height: 50px;
+  width: 50px;
   overflow: hidden;
   border-radius: 5px;
   margin-right: 1.25rem;
 }
 .User-Avatar-Container img {
-  height: 100%;
+  width: 100%;
   object-fit: contain;
 }

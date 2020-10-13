@@ -2,6 +2,7 @@ import useTimeAgo from 'hooks/useTimeAgo'
 function Message ({ message }) {
   const timeAgo = useTimeAgo(message.createdAt)
 
+  console.log(message)
   return <div className="User">
     <div className="User-Avatar-Container">
       <img src={message.user.avatar} alt={message.user.userName}/>

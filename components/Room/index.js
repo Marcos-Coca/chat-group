@@ -1,19 +1,21 @@
-
 import { useState, useEffect } from 'react'
 
+import Loader from 'components/Loader'
 import Send from 'components/Icons/Send'
 import Message from 'components/Message'
+
 import belongsRoom from 'hoc/belongsRoom'
 import useMessages from 'hooks/useMessages'
-import { sendMessage } from 'services/chat'
 import useNearScreen from 'hooks/useNearScreen'
+import { sendMessage } from 'services/chat'
 
 import styles from './styles'
 
 function Room ({ room, user }) {
-  const { messages } = useMessages(room.id)
   const [message, setMessage] = useState('')
+  const [showMessageTop, messageTopRef] = useNearScreen({})
   const [showMessageEnd, messagesEndRef] = useNearScreen({})
+  const { messages, setPage, loading } = useMessages(room.id)
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -28,16 +30,28 @@ function Room ({ room, user }) {
     showMessageEnd && messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  useEffect(() => {
+    showMessageTop && !loading && setPage(prevPage => prevPage + 1)
+  }, [showMessageTop])
+
   return (
     <div className="chat-room">
       <div className="chat-room-top">{room.name}</div>
       <div className="chat">
         <div>
-
+          <div className="messages-top">
+            {loading ? (
+              <div className="loader">
+                <Loader />
+              </div>
+            ) : (
+              <div ref={messageTopRef} />
+            )}
+          </div>
           {messages.map((message) => (
             <Message key={message.id} message={message} />
           ))}
-          <div ref={messagesEndRef}></div>
+          <div ref={messagesEndRef} />
         </div>
         <form onSubmit={handleSubmit}>
           <input type="text" value={message} onChange={handleChange} placeholder="Type a message here" />
