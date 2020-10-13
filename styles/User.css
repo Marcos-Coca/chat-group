@@ -6,18 +6,18 @@
 }
 
 .User-Name {
-  font-size: 1.25rem;
   font-weight: 500;
+  font-size: 1.25rem;
   color: var(--font-second-color);
 }
 
 .User-Avatar-Container {
-  width: 50px;
+  height: 50px;
   overflow: hidden;
   border-radius: 5px;
   margin-right: 1.25rem;
 }
 .User-Avatar-Container img {
-  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
