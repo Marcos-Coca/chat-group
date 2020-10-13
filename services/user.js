@@ -4,20 +4,31 @@ import 'firebase/firestore'
 const db = firebase.firestore()
 
 export const getUser = (userId) => {
-  return db.collection('users').doc(userId).get().then(doc => doc.data())
+  return db
+    .collection('users')
+    .doc(userId)
+    .get()
+    .then((doc) => doc.data())
+}
+
+export const updateUser = ({ userId, data }) => {
+  return db
+    .collection('users')
+    .doc(userId)
+    .update({
+      ...data
+    })
 }
 
 export function addUserToRoom ({ user, roomId }) {
-  const roomRef = db.collection('rooms').doc(roomId)
+  const roomRef = db.collection('rooms').doc(roomId).collection('users').doc(user.id)
 
-  const updateRoom = roomRef.update({
-    users: firebase.firestore.FieldValue.arrayUnion({
-      id: user.id,
-      userName: user.userName,
-      avatar: user.avatar
-    })
+  const updateRoom = roomRef.set({
+    userName: user.userName,
+    avatar: user.avatar
   })
-  const updateUser = db.collection('users')
+  const updateUser = db
+    .collection('users')
     .doc(user.id)
     .update({
       rooms: firebase.firestore.FieldValue.arrayUnion(roomRef)

@@ -72,8 +72,8 @@ function mapRoomFromFirebase (doc) {
 }
 
 export function getLiveRoomUsers (roomId, callback) {
-  return db.collection('rooms').doc(roomId).onSnapshot(function (snapshot) {
-    const users = snapshot.data().users
+  return db.collection('rooms').doc(roomId).collection('users').onSnapshot(function (snapshot) {
+    const users = snapshot.docs.map((doc) => doc.data())
 
     callback(users)
   })

@@ -39,8 +39,19 @@ export const signInWithEmailLink = (email, href) => {
 
 export const onAuthStateChanged = (onChange) => {
   return firebase.auth().onAuthStateChanged((user) => {
-    const normalizedUser = user || null
+    const normalizedUser = user ? mapUserFromFirebase(user) : null
 
     onChange(normalizedUser)
   })
+}
+
+const mapUserFromFirebase = (user) => {
+  const { displayName, email, photoURL, uid } = user
+
+  return {
+    id: uid,
+    email,
+    avatar: photoURL || 'https://res.cloudinary.com/djhogcejw/image/upload/v1602619386/defaultuser_abshi2.png',
+    userName: displayName || `guess${user.uid.slice(0, 5)}`
+  }
 }
