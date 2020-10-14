@@ -37,14 +37,15 @@ export function addUserToRoom ({ user, roomId }) {
   return Promise.all([updateRoom, updateUser])
 }
 
-export function getUserRooms ({ userId, roomId }, callback) {
+export function getUserRooms (userId, callback) {
   return db
     .collection('users')
     .doc(userId)
-    .collection('rooms')
-    .doc(roomId)
     .onSnapshot((snapshot) => {
-      const rooms = snapshot.docs.map((doc) => doc.data())
-      callback(rooms)
+      const roomsRefs = snapshot.data().rooms
+      const rooms = roomsRefs.map((roomRef) => roomRef.get())
+      Promise.all(rooms)
+        .then((rooms) => rooms.map((room) => ({ id: room.id, ...room.data() })))
+        .then(callback)
     })
 }

@@ -1,4 +1,5 @@
 import Search from 'components/Icons/Search'
+import UserRoomsList from 'components/UserRoomsList'
 function HomeAside () {
   return (
     <div className="Aside-Content-Container">
@@ -13,6 +14,8 @@ function HomeAside () {
         </button>
         <input type="text" placeholder="Search" />
       </form>
+
+      <UserRoomsList/>
 
       <style jsx>{`
         .Aside-Top {

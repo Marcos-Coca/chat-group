@@ -13,7 +13,8 @@ function useMessages (roomId) {
       setLoading(true)
       getMessages({ startAfter, roomId }).then(({ lastVisible, messages }) => {
         setStartAfter(lastVisible)
-        page === 0 && messages.shift()
+        const orderedMessages = messages.reverse()
+        page === 0 && orderedMessages.pop()
         setMessages((prevMessages) => messages.concat(prevMessages))
         setLoading(false)
       })

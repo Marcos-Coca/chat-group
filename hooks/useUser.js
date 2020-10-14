@@ -11,6 +11,7 @@ function useUser () {
     return () => unsubcribe()
   }, [])
 
+  console.log(user)
   return user
 }
 export default useUser
