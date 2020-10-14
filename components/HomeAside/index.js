@@ -35,6 +35,7 @@ function HomeAside () {
         form {
           width: 100%;
           display: flex;
+          padding: 0 5px;
           overflow:hidden;
           margin-top: 1rem;
           align-items:center;
