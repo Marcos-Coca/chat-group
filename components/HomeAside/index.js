@@ -1,6 +1,6 @@
 import Search from 'components/Icons/Search'
 import UserRoomsList from 'components/UserRoomsList'
-function HomeAside () {
+function HomeAside ({ changeAside }) {
   return (
     <div className="Aside-Content-Container">
       <div className="Aside-Top">
@@ -15,7 +15,7 @@ function HomeAside () {
         <input type="text" placeholder="Search" />
       </form>
 
-      <UserRoomsList/>
+      <UserRoomsList changeAside={changeAside}/>
 
       <style jsx>{`
         .Aside-Top {

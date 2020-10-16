@@ -16,7 +16,11 @@ function Aside () {
   return (
     <aside>
       <div className="Aside-Content">
-        {aside && roomId ? <RoomAside changeAside={changeAside} roomId={roomId} /> : <HomeAside />}
+        {aside && roomId ? (
+          <RoomAside changeAside={changeAside} roomId={roomId} />
+        ) : (
+          <HomeAside changeAside={changeAside} />
+        )}
       </div>
       <style jsx>{`
         aside {
