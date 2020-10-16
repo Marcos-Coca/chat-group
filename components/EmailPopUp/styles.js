@@ -1,42 +1,9 @@
 import css from 'styled-jsx/css'
 
 export default css`
-  .modal {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    background: rgba(9, 10, 11, 0.75);
-  }
-  .modal-content {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    margin: auto;
-    padding: 2.5rem;
-    max-width: 600px;
-    text-align: left;
-    position: absolute;
-    height: fit-content;
-    font-size: 1.125rem;
-    background: var(--main-color);
-  }
 
-  .modal-return {
-    top: 0;
-    right: 3%;
-    cursor: pointer;
-    position: absolute;
-  }
-
-  .modal-return:after {
-    font-size: 40px;
-    content: '${'\\00D7'}';
-  }
-
+ 
+ 
   .modal-buttons {
     margin: 2rem 0;
     text-align: right;
@@ -53,11 +20,7 @@ export default css`
     font-weight: bold;
     margin-bottom: 0.8rem;
   }
-  h3 {
-    margin: 0;
-    font-size: 23px;
-    margin-bottom: 11px;
-  }
+  
 
   p {
     margin-bottom: 23px;

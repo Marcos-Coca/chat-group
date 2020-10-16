@@ -21,11 +21,11 @@ function EmailPopUp ({ text, title, onSubmit, show, setShow, wrongMessage, isWro
   return (
     <>
       {show && (
-        <div className="modal">
-          <div className="modal-content">
+        <div className="Modal">
+          <div className="Modal-Content">
             <h3>{title}</h3>
             <p>{text}</p>
-            <span onClick={onClose} className="modal-return" />
+            <span onClick={onClose} className="Modal-Return" />
             <form onSubmit={handleSubmit}>
               <label htmlFor="email">Your Email:</label>
               <input
