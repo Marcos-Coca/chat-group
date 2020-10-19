@@ -1,11 +1,13 @@
 import Search from 'components/Icons/Search'
 import UserRoomsList from 'components/UserRoomsList'
+import CreateRoomButton from 'components/CreateRoomButton'
+
 function HomeAside ({ changeAside }) {
   return (
     <div className="Aside-Content-Container">
       <div className="Aside-Top">
         Rooms
-        <button>+</button>
+        <CreateRoomButton/>
       </div>
 
       <form>
@@ -24,16 +26,6 @@ function HomeAside ({ changeAside }) {
           justify-content: space-between;
         }
 
-        .Aside-Top button {
-          width: 30px;
-          border: none;
-          height: 30px;
-          cursor: pointer;
-          border-radius: 10px;
-          font-size: 1.25rem;
-          color: var(--font-main-color);
-          background: var(--second-color);
-        }
 
         form {
           width: 100%;

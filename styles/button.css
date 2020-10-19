@@ -1,4 +1,5 @@
-.buttons > * {
+.buttons > *,
+.button {
   width: 90px;
   height: 36px;
   border: none;

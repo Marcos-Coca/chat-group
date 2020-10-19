@@ -1,6 +1,9 @@
 import css from 'styled-jsx/css'
 
 export default css`
+  .Room-Container{
+    cursor:pointer;
+  }
   .Room-Logo {
     width: 40px;
     height: 40px;

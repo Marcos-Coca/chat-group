@@ -9,6 +9,7 @@
 @import './button.css';
 @import './User.css';
 @import './Aside.css';
+@import './Modal.css';
 
 html,
 body {

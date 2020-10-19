@@ -10,7 +10,7 @@ export default css`
     left: 0;
     width: 100%;
     height: 50px;
-    z-index: 3000;
+    z-index: 300;
     display: flex;
     padding-left: 10%;
     font-weight: 500;

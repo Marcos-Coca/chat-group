@@ -4,7 +4,7 @@ function useInput (initialValue) {
   const [value, setValue] = useState(initialValue)
 
   const onChange = (e) => {
-    const newValue = e.targe.value
+    const newValue = e.target.value
     setValue(newValue)
   }
 

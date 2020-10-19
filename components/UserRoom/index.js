@@ -21,7 +21,7 @@ function UserRoom ({ room, changeAside }) {
   }
 
   return (
-    <div onClick={handleClick}>
+    <div className="Room-Container" onClick={handleClick}>
       <div className="Room-Logo">{getRoomLogo(room.name)}</div>
       <span className="Room-Name">{room.name}</span>
       <style jsx>{styles}</style>

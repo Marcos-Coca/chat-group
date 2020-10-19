@@ -1,34 +1,37 @@
 import { useState } from 'react'
 
-function CreateRoomButton() {
-  const [show, setShow] = useState('false')
-  const [roomName, setRoomName] = useState('')
-  const [roomDescription, setRoomDescription] = useState('')
+import useInput from 'hooks/useInput'
 
-  const handleNameChange = (e)=>{
-      const value = e.target.value
-      setRoomName(value)
-  }
+import styles from './styles'
 
-  const handleDescriptionChange = (e)=>{
-      const value = e.target.
-  }
+function CreateRoomButton () {
+  const [name, setName] = useInput('')
+  const [show, setShow] = useState(false)
+  const [description, setDescription] = useInput('')
 
   return (
     <>
-      <button></button>
+      <button className="Create-Button" onClick={() => setShow(true)}>+</button>
       {show && (
         <div className="Modal">
           <div className="Modal-Content">
-            <span className="Modal-Return" />
-            <h3>NEW ROOM</h3>
+            <span onClick={() => setShow(false)} className="Modal-Return" />
             <form>
-              <input type="text" placeholder="Room name" max="16" min="4" value={roomName} />
-              <textarea minLength="10" maxLength="50" placeholder="Room description" value={roomDescription} />
+              <h3>NEW ROOM</h3>
+              <input type="text" placeholder="Room name" max="16" min="4" value={name} onChange={setName} />
+              <textarea
+                minLength="10"
+                maxLength="50"
+                placeholder="Room description"
+                value={description}
+                onChange={setDescription}
+              />
+              <button className="button">Save</button>
             </form>
           </div>
         </div>
       )}
+      <style jsx>{styles}</style>
     </>
   )
 }
