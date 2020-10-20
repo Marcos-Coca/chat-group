@@ -1,25 +1,28 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
-import { getMessages, getLiveMessages } from 'services/chat'
+import { messagesGetter, getLiveMessages } from 'services/chat'
 
 function useMessages (roomId) {
   const [page, setPage] = useState(0)
   const [messages, setMessages] = useState([])
   const [loading, setLoading] = useState(false)
-  const [startAfter, setStartAfter] = useState('')
+
+  const getMessages = useCallback(messagesGetter({ roomId }), [roomId])
 
   useEffect(() => {
-    if (startAfter || startAfter === '') {
-      setLoading(true)
-      getMessages({ startAfter, roomId }).then(({ lastVisible, messages }) => {
-        setStartAfter(lastVisible)
-        const orderedMessages = messages.reverse()
-        page === 0 && orderedMessages.pop()
-        setMessages((prevMessages) => messages.concat(prevMessages))
-        setLoading(false)
-      })
-    }
-  }, [page])
+    setLoading(true)
+    getMessages().then((messages) => {
+      const orderedMessages = messages.reverse()
+      page === 0 && orderedMessages.pop()
+      setMessages((prevMessages) => messages.concat(prevMessages))
+      setLoading(false)
+    })
+  }, [page, roomId])
+
+  useEffect(() => {
+    setMessages([])
+    setPage(0)
+  }, [roomId])
 
   useEffect(() => {
     const unsuscribe = getLiveMessages(roomId, (newMessages) => {
@@ -27,7 +30,7 @@ function useMessages (roomId) {
     })
 
     return () => unsuscribe()
-  }, [])
+  }, [roomId])
 
   return { setPage, messages, loading }
 }

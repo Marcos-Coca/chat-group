@@ -2,9 +2,9 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import Loader from 'components/Loader'
-import { getRoom } from 'services/chat'
 import { addUserToRoom } from 'services/user'
 import { DEFAULT_ROOM } from 'utils/constants/room'
+import { getRoom, isUserInRoom } from 'services/chat'
 
 import styles from './styles'
 
@@ -14,17 +14,12 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
   const [belongs, setBelongs] = useState()
 
   useEffect(() => {
-    getRoom(roomId).then((room) => {
-      setRoom(room)
-
-      if (roomId !== DEFAULT_ROOM) {
-        const isInRoom = room.users.find(({ id }) => id === user.id)
-        setBelongs(Boolean(isInRoom))
-      } else {
-        setBelongs(true)
-      }
-    })
-  }, [])
+    getRoom(roomId)
+      .then(setRoom)
+      .then(() => {
+        roomId === DEFAULT_ROOM ? setBelongs(true) : isUserInRoom({ userId: user.id, roomId }).then(setBelongs)
+      })
+  }, [roomId])
 
   const handleCancelClick = () => router.push('/')
 
@@ -44,7 +39,9 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
       ) : (
         <div className="NotBelongs-Container">
           <div>
-            <h3>You don&apos;t belong to room <br/> <b>{room.name}</b></h3>
+            <h3>
+              You don&apos;t belong to room <br /> <b>{room.name}</b>
+            </h3>
             <span>Do you want to join?</span>
             <div className="buttons">
               <button onClick={handleCancelClick}>Cancel</button>

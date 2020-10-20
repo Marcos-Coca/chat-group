@@ -35,5 +35,5 @@
 
 .Modal-Return:after {
   font-size: 40px;
-  content: '${' \\00d7 '}';
+  content: '\00d7';
 }

@@ -1,6 +1,8 @@
 import firebase from './client'
 import 'firebase/firestore'
 
+import { addUserToRoom } from './user'
+
 const db = firebase.firestore()
 
 export function sendMessage ({ roomId, message, user }) {
@@ -13,20 +15,26 @@ export function sendMessage ({ roomId, message, user }) {
   })
 }
 
-export function getMessages ({ startAfter, roomId }) {
-  const messagesRef = db
-    .collection('rooms')
-    .doc(roomId)
-    .collection('messages')
-    .limit(25)
-    .orderBy('createdAt', 'desc')
-    .startAfter(startAfter)
+export function messagesGetter ({ roomId }) {
+  let startAfter = ''
 
-  return messagesRef.get().then((documentSnapshots) => {
-    const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
-    const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
-    return { lastVisible, messages }
-  })
+  function getMessages () {
+    return db
+      .collection('rooms')
+      .doc(roomId)
+      .collection('messages')
+      .limit(10)
+      .orderBy('createdAt', 'desc')
+      .startAfter(startAfter)
+      .get()
+      .then((documentSnapshots) => {
+        const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
+        startAfter = lastVisible || ''
+        const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
+        return messages
+      })
+  }
+  return getMessages
 }
 
 function mapMessageFromFirebase (doc) {
@@ -55,11 +63,7 @@ export function getLiveMessages (roomId, callback) {
 }
 
 export function getRoom (roomId) {
-  return db
-    .collection('rooms')
-    .doc(roomId)
-    .get()
-    .then(mapRoomFromFirebase)
+  return db.collection('rooms').doc(roomId).get().then(mapRoomFromFirebase)
 }
 
 function mapRoomFromFirebase (doc) {
@@ -72,9 +76,33 @@ function mapRoomFromFirebase (doc) {
 }
 
 export function getLiveRoomUsers (roomId, callback) {
-  return db.collection('rooms').doc(roomId).collection('users').onSnapshot(function (snapshot) {
-    const users = snapshot.docs.map((doc) => doc.data())
+  return db
+    .collection('rooms')
+    .doc(roomId)
+    .collection('users')
+    .onSnapshot(function (snapshot) {
+      const users = snapshot.docs.map((doc) => doc.data())
 
-    callback(users)
-  })
+      callback(users)
+    })
+}
+
+export function createRoom ({ user, name, description }) {
+  return db
+    .collection('rooms')
+    .add({
+      name,
+      description
+    })
+    .then((roomRef) => addUserToRoom({ user, roomId: roomRef.id }))
+}
+
+export function isUserInRoom ({ userId, roomId }) {
+  return db
+    .collection('rooms')
+    .doc(roomId)
+    .collection('users')
+    .doc(userId)
+    .get()
+    .then((doc) => doc.exists)
 }

@@ -17,6 +17,9 @@
   overflow-y: hidden;
   scrollbar-width: none;
 }
+.Aside-List-List > * {
+  margin-bottom: 10px;
+}
 
 .Aside-Top {
   top: 0;
