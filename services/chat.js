@@ -16,23 +16,27 @@ export function sendMessage ({ roomId, message, user }) {
 }
 
 export function messagesGetter ({ roomId }) {
-  let startAfter = ''
-
+  let startAfter = ' '
+  const limit = window ? Math.round(window.screen.height / 70) : 25
+  console.log(startAfter)
   function getMessages () {
-    return db
-      .collection('rooms')
-      .doc(roomId)
-      .collection('messages')
-      .limit(10)
-      .orderBy('createdAt', 'desc')
-      .startAfter(startAfter)
-      .get()
-      .then((documentSnapshots) => {
-        const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
-        startAfter = lastVisible || ''
-        const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
-        return messages
-      })
+    if (startAfter) {
+      return db
+        .collection('rooms')
+        .doc(roomId)
+        .collection('messages')
+        .limit(limit)
+        .orderBy('createdAt', 'desc')
+        .startAfter(startAfter)
+        .get()
+        .then((documentSnapshots) => {
+          const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
+          startAfter = lastVisible
+          const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
+          return messages
+        })
+    }
+    return Promise.resolve([])
   }
   return getMessages
 }
