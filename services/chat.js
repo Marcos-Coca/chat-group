@@ -16,27 +16,25 @@ export function sendMessage ({ roomId, message, user }) {
 }
 
 export function messagesGetter ({ roomId }) {
-  let startAfter = ' '
+  let startAfter = ''
   const limit = window ? Math.round(window.screen.height / 70) : 25
-  console.log(startAfter)
   function getMessages () {
-    if (startAfter) {
-      return db
-        .collection('rooms')
-        .doc(roomId)
-        .collection('messages')
-        .limit(limit)
-        .orderBy('createdAt', 'desc')
-        .startAfter(startAfter)
-        .get()
-        .then((documentSnapshots) => {
-          const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
-          startAfter = lastVisible
-          const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
-          return messages
-        })
-    }
-    return Promise.resolve([])
+    if (startAfter === undefined) return Promise.resolve([])
+    return db
+      .collection('rooms')
+      .doc(roomId)
+      .collection('messages')
+      .limit(limit)
+      .orderBy('createdAt', 'desc')
+      .startAfter(startAfter)
+      .get()
+      .then((documentSnapshots) => {
+        const lastVisible = documentSnapshots.docs[documentSnapshots.docs.length - 1]
+        startAfter = lastVisible
+        const messages = documentSnapshots.docs.map(mapMessageFromFirebase)
+        const orderedMessages = messages.reverse()
+        return orderedMessages
+      })
   }
   return getMessages
 }
@@ -58,8 +56,7 @@ export function getLiveMessages (roomId, callback) {
     .collection('rooms')
     .doc(roomId)
     .collection('messages')
-    .limit(1)
-    .orderBy('createdAt', 'desc')
+    .where('createdAt', '>', firebase.firestore.Timestamp.fromDate(new Date()))
     .onSnapshot((snapshot) => {
       const newMessages = snapshot.docs.map(mapMessageFromFirebase)
       callback(newMessages)
