@@ -1,4 +1,8 @@
+import { memo } from 'react'
 import useTimeAgo from 'hooks/useTimeAgo'
+
+import styles from './styles'
+
 function Message ({ message }) {
   const timeAgo = useTimeAgo(message.createdAt)
 
@@ -11,18 +15,9 @@ function Message ({ message }) {
       <span className="TimeAgo">{timeAgo}</span>
       <p>{message.message}</p>
     </div>
-    <style jsx>{`
-        
-          p{
-            margin: 10px 0;
-            font-size:1.25rem;
-          }
-          .TimeAgo{
-            font-size:0.865rem;
-            margin-left:1.25rem;
-            color:var(--font-second-color)
-          }
-        `}</style>
+    <style jsx>{styles}</style>
   </div>
 }
-export default Message
+export default memo(Message, (prevProps, nextProps) => {
+  return prevProps.message.id === nextProps.message.id
+})
