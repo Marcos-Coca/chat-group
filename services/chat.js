@@ -107,3 +107,12 @@ export function isUserInRoom ({ userId, roomId }) {
     .get()
     .then((doc) => doc.exists)
 }
+
+export function searchRoomsByName (name) {
+  return db
+    .collection('rooms')
+    .where('name', '>=', name)
+    .where('name', '<=', name + '\uf8ff')
+    .get()
+    .then((doc) => doc.docs.map(mapRoomFromFirebase))
+}
