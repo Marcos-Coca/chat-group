@@ -1,17 +1,25 @@
+import { useState } from 'react'
+
 import RoomSearch from 'components/RoomSearch'
 import UserRoomsList from 'components/UserRoomsList'
 import CreateRoomButton from 'components/CreateRoomButton'
+import RoomSearchResults from 'components/RoomSearchResults'
 
 function HomeAside ({ changeAside }) {
+  const [search, setSearch] = useState(false)
   return (
     <div className="Aside-Content-Container">
       <div className="Aside-Top">
         Rooms
-        <CreateRoomButton/>
+        <CreateRoomButton />
       </div>
-      <RoomSearch/>
-      <UserRoomsList changeAside={changeAside}/>
-
+      <RoomSearch setSearch={setSearch} />
+      {console.log(search)}
+      {search ? (
+        <RoomSearchResults value={search} changeAside={changeAside} />
+      ) : (
+        <UserRoomsList changeAside={changeAside} />
+      )}
       <style jsx>{`
         .Aside-Top {
           display: flex;

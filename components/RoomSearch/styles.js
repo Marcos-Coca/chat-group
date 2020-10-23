@@ -22,9 +22,11 @@ export default css`
     border: none;
     background: transparent;
   }
-  .Test{
-      background:red;
+  .Search-Results{
       position:absolute;
-      color:var(--font-main-color);
+      width:85%;
+      min-height:70vh;
+      color:var(--main-color);
+      background:var(--font-main-color);
   }
 `

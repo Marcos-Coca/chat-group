@@ -9,25 +9,19 @@ function UserRoomsList ({ changeAside }) {
   const [rooms, setRooms] = useState([])
 
   useEffect(() => {
-    if (user) {
-      const unsuscribe = getUserRooms(user.id, setRooms)
+    const unsuscribe = user ? getUserRooms(user.id, setRooms) : () => {}
 
-      return () => unsuscribe()
-    }
+    return () => unsuscribe()
   }, [user])
 
   return (
     <div className="Aside-List">
+      <h4>MY ROOMS</h4>
       <div className="Aside-List-List">
         {rooms.map((room) => (
           <UserRoom changeAside={changeAside} key={room.id} room={room} />
         ))}
       </div>
-      <style jsx>{`
-        .Aside-List {
-          margin-top: 1rem;
-        }
-      `}</style>
     </div>
   )
 }

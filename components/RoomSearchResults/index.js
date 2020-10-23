@@ -2,15 +2,31 @@ import Loader from 'components/Loader'
 import UserRoom from 'components/UserRoom'
 import useSearchRooms from 'hooks/useSearchRooms'
 
-function RoomSearchResults ({ value }) {
+function RoomSearchResults ({ value, changeAside }) {
   const { rooms, loading } = useSearchRooms(value)
 
-  console.log(rooms)
-  return loading ? (
-    <Loader />
-  ) : (
-    <div>
-      {rooms.map((room) => <UserRoom key={room.id} room={room} changeAside={() => {}} />)}
+  return (
+    <div className="Aside-List">
+      <h4>RESULTS</h4>
+      {loading ? (
+        <div className="loader">
+          <Loader />
+        </div>
+      ) : (
+        <div className="Aside-List-List">
+          {rooms.length ? (
+            rooms.map((room) => <UserRoom key={room.id} room={room} changeAside={changeAside} />)
+          ) : (
+            <div>No hay rooms</div>
+          )}
+        </div>
+      )}
+      <style jsx>{`
+        .loader {
+          display: flex;
+          justify-content: center;
+        }
+      `}</style>
     </div>
   )
 }

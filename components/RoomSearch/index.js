@@ -1,25 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import useInput from 'hooks/useInput'
 import Search from 'components/Icons/Search'
-import RoomSearchResults from 'components/RoomSearchResults'
 
 import styles from './styles'
 
-function RoomSearch () {
+function RoomSearch ({ setSearch }) {
   const [value, setValue] = useInput('')
-  const [focus, setFocus] = useState(false)
-  const [search, setSearch] = useState(false)
-
-  const handleFocus = () => setFocus(true)
-  const handleBlur = () => setFocus(false)
 
   useEffect(() => {
-    value.length >= 3 ? setSearch(true) : setSearch(false)
+    value ? setSearch(value) : setSearch(false)
   }, [value])
 
   return (
-    <>
+    <div style={{ position: 'relative' }}>
       <form onSubmit={(e) => e.preventDefault()}>
         <span>
           <Search fill="var(--font-main-color)" height="20px" width="20px" />
@@ -28,18 +22,11 @@ function RoomSearch () {
           type="text"
           placeholder="Search"
           value={value}
-          onBlur={handleBlur}
-          onFocus={handleFocus}
           onChange={setValue}
         />
       </form>
-      {focus && (
-        <div className="Test">
-          {search ? <RoomSearchResults value={value}/> : <span>Enter at least 3 characters to search</span>}
-        </div>
-      )}
       <style jsx>{styles}</style>
-    </>
+    </div>
   )
 }
 

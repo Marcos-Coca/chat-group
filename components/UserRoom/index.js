@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 
 import styles from './styles'
-
 function getRoomLogo (name) {
   const spaceIndex = name.indexOf(' ') + 1
 
