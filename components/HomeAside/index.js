@@ -14,7 +14,6 @@ function HomeAside ({ changeAside }) {
         <CreateRoomButton />
       </div>
       <RoomSearch setSearch={setSearch} />
-      {console.log(search)}
       {search ? (
         <RoomSearchResults value={search} changeAside={changeAside} />
       ) : (

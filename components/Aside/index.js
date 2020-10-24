@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 
+import useUser from 'hooks/useUser'
 import RoomAside from 'components/RoomAside'
 import HomeAside from 'components/HomeAside'
 
+import styles from './styles'
+
 function Aside () {
   const router = useRouter()
+  const user = useUser()
   const roomId = router.query.id
   const [aside, setAside] = useState(Boolean(roomId))
 
@@ -22,19 +26,18 @@ function Aside () {
           <HomeAside changeAside={changeAside} />
         )}
       </div>
-      <style jsx>{`
-        aside {
-          width: 30%;
-          position: relative;
-          background: var(--dark-main-color);
-        }
-
-        .Aside-Content {
-          width: 85%;
-          height: 90%;
-          margin: auto;
-        }
-      `}</style>
+      <div className="Aside-Footer">
+        <div>
+          <div className="User">
+            <div className="User-Avatar-Container">
+              <img src={user?.avatar} alt={user?.userName}/>
+            </div>
+            <span className="User-Name"> {user?.userName}</span>
+          </div>
+          <button><i className="material-icons">navigate before</i></button>
+        </div>
+      </div>
+      <style jsx>{styles}</style>
     </aside>
   )
 }

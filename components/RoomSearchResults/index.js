@@ -17,7 +17,7 @@ function RoomSearchResults ({ value, changeAside }) {
           {rooms.length ? (
             rooms.map((room) => <UserRoom key={room.id} room={room} changeAside={changeAside} />)
           ) : (
-            <div>No hay rooms</div>
+            <div>There&apos;s no rooms with that name</div>
           )}
         </div>
       )}
