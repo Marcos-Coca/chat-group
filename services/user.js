@@ -49,3 +49,13 @@ export function getUserRooms (userId, callback) {
         .then(callback)
     })
 }
+
+export function leaveRoom ({ userId, roomId }) {
+  const roomRef = db.collection('rooms').doc(roomId)
+  const userRef = db.collection('users').doc(userId)
+
+  const updateRoom = roomRef.collection('users').doc(userId).delete()
+  const updateUser = userRef.update({ rooms: firebase.firestore.FieldValue.arrayRemove(roomRef) })
+
+  return Promise.all([updateRoom, updateUser])
+}

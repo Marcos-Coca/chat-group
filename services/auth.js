@@ -44,6 +44,7 @@ export const onAuthStateChanged = (onChange) => {
     onChange(normalizedUser)
   })
 }
+export const logOut = () => firebase.auth().signOut()
 
 const mapUserFromFirebase = (user) => {
   const { displayName, email, photoURL, uid } = user
