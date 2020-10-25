@@ -17,17 +17,26 @@ function Aside () {
   }
 
   return (
-    <aside>
-      <div className="Aside-Content">
-        {aside && roomId ? (
-          <RoomAside changeAside={changeAside} roomId={roomId} />
-        ) : (
-          <HomeAside changeAside={changeAside} />
-        )}
-      </div>
-      <AsideFooter router={router} roomId={roomId}/>
+    <>
+      <input type="checkbox" id="btnControl" />
+      <label className="Hamburger" htmlFor="btnControl">
+        <div className="bar1"></div>
+        <div className="bar2"></div>
+        <div className="bar3"></div>
+      </label>
+
+      <aside>
+        <div className="Aside-Content">
+          {aside && roomId ? (
+            <RoomAside changeAside={changeAside} roomId={roomId} />
+          ) : (
+            <HomeAside changeAside={changeAside} />
+          )}
+        </div>
+        <AsideFooter router={router} roomId={roomId} />
+      </aside>
       <style jsx>{styles}</style>
-    </aside>
+    </>
   )
 }
 

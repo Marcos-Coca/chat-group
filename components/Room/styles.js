@@ -26,4 +26,10 @@ export default css`
     position: relative;
   }
 
+  @media(max-width:765px){
+    .chat-room-top{
+      padding-left:80px;
+    }
+  }
+
 `

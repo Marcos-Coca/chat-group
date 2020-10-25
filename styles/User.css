@@ -7,12 +7,15 @@
 
 .User-Name {
   font-weight: 500;
+  overflow: hidden;
   font-size: 1.25rem;
   color: var(--font-second-color);
+  text-overflow: ellipsis;
 }
 
 .User-Avatar-Container {
   height: 50px;
+  flex-shrink: 0;
   overflow: hidden;
   border-radius: 5px;
   margin-right: 1.25rem;

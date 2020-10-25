@@ -33,7 +33,9 @@ const belongsRoom = (Room) => ({ user, roomId }) => {
   return (
     <>
       {belongs === undefined ? (
-        <Loader />
+        <div className="loader">
+          <Loader />
+        </div>
       ) : belongs ? (
         <Room room={room} user={user} />
       ) : (

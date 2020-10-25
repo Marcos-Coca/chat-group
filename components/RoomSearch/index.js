@@ -13,7 +13,7 @@ function RoomSearch ({ setSearch }) {
   }, [value])
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div>
       <form onSubmit={(e) => e.preventDefault()}>
         <span>
           <Search fill="var(--font-main-color)" height="20px" width="20px" />

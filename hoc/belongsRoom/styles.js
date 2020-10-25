@@ -25,6 +25,13 @@ export default css`
   .buttons > * {
     margin: 1.5rem 10px;
   }
+  .loader{
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
 
   @media (max-width: 650px) {
     .NotBelongs-Container > div {

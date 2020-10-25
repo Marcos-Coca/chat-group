@@ -29,7 +29,7 @@ export default css`
     font-size: 1.25rem;
     position: absolute;
     border-radius: 10px;
-    background: var(--second-color);
+    background: var(--third-color);
   }
   .User-Menu > div {
     width: 80%;

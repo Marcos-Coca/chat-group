@@ -22,11 +22,11 @@ export default css`
     border: none;
     background: transparent;
   }
-  .Search-Results{
-      position:absolute;
-      width:85%;
-      min-height:70vh;
-      color:var(--main-color);
-      background:var(--font-main-color);
+  .Search-Results {
+    position: absolute;
+    width: 85%;
+    min-height: 70vh;
+    color: var(--main-color);
+    background: var(--font-main-color);
   }
 `
