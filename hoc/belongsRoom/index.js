@@ -4,28 +4,23 @@ import { useEffect, useState } from 'react'
 import Loader from 'components/Loader'
 import { addUserToRoom } from 'services/user'
 import { DEFAULT_ROOM } from 'utils/constants/room'
-import { getRoom, isUserInRoom } from 'services/chat'
+import { isUserInRoom } from 'services/chat'
 
 import styles from './styles'
 
-const belongsRoom = (Room) => ({ user, roomId }) => {
+const belongsRoom = (Room) => ({ user, room }) => {
   const router = useRouter()
-  const [room, setRoom] = useState({})
   const [belongs, setBelongs] = useState()
 
   useEffect(() => {
-    getRoom(roomId)
-      .then(setRoom)
-      .then(() => {
-        roomId === DEFAULT_ROOM ? setBelongs(true) : isUserInRoom({ userId: user.id, roomId }).then(setBelongs)
-      })
-  }, [roomId])
+    room.id === DEFAULT_ROOM ? setBelongs(true) : isUserInRoom({ userId: user.id, roomId: room.id }).then(setBelongs)
+  }, [room.id])
 
   const handleCancelClick = () => router.push('/')
 
   const handleJoinClick = () => {
     setBelongs()
-    addUserToRoom({ user, roomId }).then(() => {
+    addUserToRoom({ user, room: room.id }).then(() => {
       setBelongs(true)
     })
   }

@@ -1,7 +1,7 @@
 
 import isAuthenticated from 'hoc/isAuthenticated'
 
-function Home () {
+function Home ({ statusCode = 200 }) {
   return <div>
   </div>
 }

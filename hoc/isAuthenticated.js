@@ -1,3 +1,4 @@
+import Error from 'next/error'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -9,6 +10,10 @@ const isAuthenticated = (Page) => (props) => {
   const user = useUser()
   const router = useRouter()
 
+  if (props.statusCode && props.statusCode !== 200) {
+    return <Error statusCode={props.statusCode}/>
+  }
+
   useEffect(() => {
     user === null && router.replace('/login')
   }, [user])
@@ -17,7 +22,7 @@ const isAuthenticated = (Page) => (props) => {
     <>
       {user ? (
         <div className="container">
-          <Aside/>
+          <Aside {...props}/>
           <Page user={user} {...props} />
         </div>
       ) : (

@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react'
 
-import { getRoom } from 'services/chat'
 import RoomUsersList from 'components/RoomUsersList'
 
 import styles from './styles'
 
-function RoomAside ({ roomId, changeAside }) {
-  const [room, setRoom] = useState({})
-
-  useEffect(() => {
-    getRoom(roomId).then(setRoom)
-  }, [])
-
+function RoomAside ({ room, changeAside }) {
   return (
     <div className="Aside-Content-Container">
       <div className="Aside-Top">
@@ -21,7 +13,7 @@ function RoomAside ({ roomId, changeAside }) {
         <h4>{room.name}</h4>
         <p>{room.description}</p>
       </div>
-      <RoomUsersList roomId={roomId} />
+      <RoomUsersList roomId={room.id} />
 
       <style jsx>{styles}</style>
     </div>

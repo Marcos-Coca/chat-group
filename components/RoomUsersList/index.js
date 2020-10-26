@@ -7,8 +7,12 @@ function RoomUsersList ({ roomId }) {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    const unsuscribe = getLiveRoomUsers(roomId, setUsers)
-    return () => unsuscribe()
+    try {
+      const unsuscribe = getLiveRoomUsers(roomId, setUsers)
+      return () => unsuscribe()
+    } catch {
+      setUsers([])
+    }
   }, [])
 
   return (

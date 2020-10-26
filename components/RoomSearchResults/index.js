@@ -3,7 +3,9 @@ import UserRoom from 'components/UserRoom'
 import useSearchRooms from 'hooks/useSearchRooms'
 
 function RoomSearchResults ({ value, changeAside }) {
-  const { rooms, loading } = useSearchRooms(value)
+  const { rooms, loading, error } = useSearchRooms(value)
+
+  if (error) return <span>Something is wrong, please try again</span>
 
   return (
     <div className="Aside-List">

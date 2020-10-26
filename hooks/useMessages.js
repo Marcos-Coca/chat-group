@@ -15,7 +15,7 @@ function useMessages (roomId) {
     getMessages().then((messages) => {
       setMessages((prevMessages) => messages.concat(prevMessages))
       setLoading(false)
-    })
+    }).catch(() => {})
   }, [page, roomId])
 
   useEffect(() => {
@@ -24,8 +24,10 @@ function useMessages (roomId) {
   }, [roomId])
 
   useEffect(() => {
-    const unsuscribe = getLiveMessages(roomId, setNewMessages)
-    return () => unsuscribe()
+    try {
+      const unsuscribe = getLiveMessages(roomId, setNewMessages)
+      return () => unsuscribe()
+    } catch {}
   }, [roomId])
 
   return { setPage, messages: messages.concat(newMessages), loading }

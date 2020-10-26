@@ -1,16 +1,22 @@
+
 import Room from 'components/Room'
+import { getRoom } from 'services/chat'
 import isAuthenticated from 'hoc/isAuthenticated'
 
-function Rooms ({ roomId, user }) {
-  return <Room roomId={roomId} user={user}/>
+function Rooms ({ room, user }) {
+  return <Room room={room} user={user} />
 }
 
-export function getServerSideProps (context) {
-  const { id } = context.params
-  return {
-    props: {
-      roomId: id
-    }
+export async function getServerSideProps (context) {
+  try {
+    const { id } = context.params
+    const room = await getRoom(id)
+
+    if (!room.id) return { props: { room: null, statusCode: 404 } }
+
+    return { props: { room, statusCode: 200 } }
+  } catch (e) {
+    return { props: { room: null, statusCode: 503 } }
   }
 }
 

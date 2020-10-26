@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 import useUser from 'hooks/useUser'
 import { logOut } from 'services/auth'
@@ -7,8 +8,9 @@ import NavigateDown from 'components/Icons/NavigateDown'
 
 import styles from './styles'
 
-function AsideFooter ({ roomId, router }) {
+function AsideFooter ({ roomId }) {
   const user = useUser()
+  const router = useRouter()
   const [modal, setModal] = useState(false)
 
   const handleClick = () => setModal((prevModal) => !prevModal)

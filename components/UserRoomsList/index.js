@@ -9,9 +9,10 @@ function UserRoomsList ({ changeAside }) {
   const [rooms, setRooms] = useState([])
 
   useEffect(() => {
-    const unsuscribe = user ? getUserRooms(user.id, setRooms) : () => {}
-
-    return () => unsuscribe()
+    try {
+      const unsuscribe = user ? getUserRooms(user.id, setRooms) : () => {}
+      return () => unsuscribe()
+    } catch {}
   }, [user])
 
   return (
