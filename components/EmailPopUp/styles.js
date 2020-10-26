@@ -1,9 +1,6 @@
 import css from 'styled-jsx/css'
 
 export default css`
-
- 
- 
   .modal-buttons {
     margin: 2rem 0;
     text-align: right;
@@ -20,7 +17,6 @@ export default css`
     font-weight: bold;
     margin-bottom: 0.8rem;
   }
-  
 
   p {
     margin-bottom: 23px;
@@ -42,10 +38,9 @@ export default css`
     border-color: var(--main-color);
   }
 
-  @media(max-width:650px){
-      .modal-content{
-          height:100vh;
-      }
-
+  @media (max-width: 650px) {
+    .modal-content {
+      height: 100vh;
+    }
   }
 `

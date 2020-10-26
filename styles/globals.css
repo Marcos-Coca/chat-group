@@ -10,7 +10,7 @@
 @import './User.css';
 @import './Aside.css';
 @import './Modal.css';
-
+@import './ScrollBar.css';
 html,
 body {
   padding: 0;

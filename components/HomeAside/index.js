@@ -5,6 +5,8 @@ import UserRoomsList from 'components/UserRoomsList'
 import CreateRoomButton from 'components/CreateRoomButton'
 import RoomSearchResults from 'components/RoomSearchResults'
 
+import styles from './styles'
+
 function HomeAside ({ changeAside }) {
   const [search, setSearch] = useState(false)
   return (
@@ -19,13 +21,7 @@ function HomeAside ({ changeAside }) {
       ) : (
         <UserRoomsList changeAside={changeAside} />
       )}
-      <style jsx>{`
-        .Aside-Top {
-          display: flex;
-          padding: 0 1rem;
-          justify-content: space-between;
-        }
-      `}</style>
+      <style jsx>{styles}</style>
     </div>
   )
 }

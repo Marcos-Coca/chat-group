@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useCallback } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 
 import Loader from 'components/Loader'
 import Message from 'components/Message'
@@ -59,4 +59,4 @@ function MessagesList ({ roomId }) {
   )
 }
 
-export default memo(MessagesList)
+export default MessagesList
