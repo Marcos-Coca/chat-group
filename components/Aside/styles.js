@@ -47,7 +47,7 @@ export default css`
 
   @media (max-width: 765px) {
     aside {
-      left: -100%;
+      left: -150%;
       height: 100%;
       z-index: 30000;
       position: absolute;

@@ -21,8 +21,8 @@ export const updateUser = ({ userId, data }) => {
 }
 
 export function addUserToRoom ({ user, roomId }) {
+  console.log(user, roomId)
   const roomRef = db.collection('rooms').doc(roomId)
-
   const updateRoom = roomRef.collection('users').doc(user.id).set({
     userName: user.userName,
     avatar: user.avatar

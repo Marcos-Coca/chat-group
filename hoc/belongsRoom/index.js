@@ -20,7 +20,8 @@ const belongsRoom = (Room) => ({ user, room }) => {
 
   const handleJoinClick = () => {
     setBelongs()
-    addUserToRoom({ user, room: room.id }).then(() => {
+    console.log(room)
+    addUserToRoom({ user, roomId: room.id }).then(() => {
       setBelongs(true)
     })
   }
