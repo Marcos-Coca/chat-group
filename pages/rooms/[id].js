@@ -11,7 +11,6 @@ export async function getServerSideProps (context) {
   try {
     const { id } = context.params
     const room = await getRoom(id)
-
     if (!room.id) return { props: { room: null, statusCode: 404 } }
 
     return { props: { room, statusCode: 200 } }
