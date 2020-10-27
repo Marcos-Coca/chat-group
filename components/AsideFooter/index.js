@@ -21,6 +21,7 @@ function AsideFooter ({ roomId }) {
   const handleLeaveRoom = () => {
     leaveRoom({ roomId, userId: user.id }).then(() => router.push('/'))
   }
+  console.log(user)
 
   return (
     <div className="Aside-Footer">

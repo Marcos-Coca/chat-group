@@ -1,9 +1,13 @@
-
+import Head from 'next/head'
 import isAuthenticated from 'hoc/isAuthenticated'
 
-function Home ({ statusCode = 200 }) {
-  return <div>
-  </div>
+function Home () {
+  return <>
+    <Head>
+      <title>Home</title>
+    </Head>
+
+  </>
 }
 
 export default isAuthenticated(Home)

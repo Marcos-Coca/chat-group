@@ -1,10 +1,16 @@
+import Head from 'next/head'
 
 import Room from 'components/Room'
 import { getRoom } from 'services/chat'
 import isAuthenticated from 'hoc/isAuthenticated'
 
 function Rooms ({ room, user }) {
-  return <Room room={room} user={user} />
+  return <>
+    <Head>
+      <title>{room.name}</title>
+    </Head>
+    <Room room={room} user={user} />
+  </>
 }
 
 export async function getServerSideProps (context) {

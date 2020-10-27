@@ -7,15 +7,17 @@ import AsideFooter from 'components/AsideFooter'
 import styles from './styles'
 
 function Aside ({ room = {} }) {
+  const [checked, setChecked] = useState(!room.id)
   const [aside, setAside] = useState(Boolean(room.id))
 
   const changeAside = () => {
     setAside((prevAside) => !prevAside)
   }
+  const handleChange = () => setChecked(prevChecked => !prevChecked)
 
   return (
     <>
-      <input type="checkbox" id="btnControl" />
+      <input type="checkbox" checked={checked} onChange={handleChange} id="btnControl" />
       <label className="Hamburger" htmlFor="btnControl">
         <div className="bar1"></div>
         <div className="bar2"></div>
@@ -30,7 +32,7 @@ function Aside ({ room = {} }) {
             <HomeAside changeAside={changeAside} />
           )}
         </div>
-        <AsideFooter room={room} />
+        <AsideFooter roomId={room.id} />
       </aside>
       <style jsx>{styles}</style>
     </>

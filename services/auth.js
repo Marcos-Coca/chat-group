@@ -40,7 +40,6 @@ export const signInWithEmailLink = (email, href) => {
 export const onAuthStateChanged = (onChange) => {
   return firebase.auth().onAuthStateChanged((user) => {
     const normalizedUser = user ? mapUserFromFirebase(user) : null
-
     onChange(normalizedUser)
   })
 }
