@@ -27,7 +27,7 @@ function Email () {
     if (email) {
       signInWithEmailLink(email, window.location.href)
         .then(() => window.localStorage.removeItem('emailForSignIn'))
-        .catch((err) => console.log(err))
+        .catch((err) => console.error(err))
     }
   }, [])
 

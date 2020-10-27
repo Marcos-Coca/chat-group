@@ -18,10 +18,9 @@ function LoginButton ({ socialMedia, fill }) {
   }
 
   const loginWithSocialMedia = () => {
-    login().then((user) => {
-      console.log(user)
+    login().then(() => {
     })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
   }
 
   const handleEmailClick = (email) => {
@@ -30,7 +29,7 @@ function LoginButton ({ socialMedia, fill }) {
         window.localStorage.setItem('emailForSignIn', email)
         alert(`We just emailed a confirmation link to ${email}. Click the link to complete your account set-up.`)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.error(err))
   }
 
   return <>
