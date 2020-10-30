@@ -7,11 +7,11 @@ test('Change value from event', () => {
   const { result } = setUp()
 
   act(() => {
-    const e = { target: { value: 'test' } }
+    const e = { target: { value: 'One Piece' } }
     result.current[1](e)
   })
 
-  expect(result.current[0]).toBe('test')
+  expect(result.current[0]).toBe('One Piece')
 })
 
 test('Change value directly', () => {

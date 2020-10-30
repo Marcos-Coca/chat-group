@@ -35,6 +35,7 @@
 		],
 		"setupFilesAfterEnv": [
 			"<rootDir>/__test__/setupTest.js"
-		]
+		],
+		"modulePaths": ["."]
 	}
 }
