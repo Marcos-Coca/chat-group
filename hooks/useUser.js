@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 
 import { onAuthStateChanged } from 'services/auth'
 
-function useUser () {
+function useUser() {
   const [user, setUser] = useState()
 
   useEffect(() => {
-    const unsubcribe = onAuthStateChanged(setUser)
+    const unsuscribe = onAuthStateChanged(setUser)
 
-    return () => unsubcribe()
+    return () => unsuscribe()
   }, [])
 
   return user

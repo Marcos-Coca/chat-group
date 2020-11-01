@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"test": "jest"
 	},
 	"dependencies": {
 		"firebase": "^7.21.1",
@@ -14,11 +15,28 @@
 		"react-dom": "16.13.1"
 	},
 	"devDependencies": {
+		"@testing-library/react-hooks": "^3.4.2",
+		"babel-jest": "^26.6.1",
+		"enzyme": "^3.11.0",
+		"enzyme-adapter-react-16": "^1.15.5",
 		"eslint": "^7.9.0",
 		"eslint-config-standard": "^14.1.1",
 		"eslint-plugin-import": "^2.22.0",
 		"eslint-plugin-promise": "^4.2.1",
 		"eslint-plugin-react": "^7.21.2",
-		"eslint-plugin-standard": "^4.0.1"
+		"eslint-plugin-standard": "^4.0.1",
+		"jest": "^26.6.1",
+		"react-test-renderer": "^17.0.1"
+	},
+	"jest": {
+		"transformIgnorePatterns": [
+			"/node_modules/"
+		],
+		"setupFilesAfterEnv": [
+			"<rootDir>/__test__/setupTest.js"
+		],
+		"modulePaths": [
+			"."
+		]
 	}
 }
