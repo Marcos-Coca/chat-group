@@ -9,14 +9,12 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"@babel/preset-env": "^7.12.1",
 		"firebase": "^7.21.1",
 		"next": "^9.5.5",
 		"react": "16.13.1",
 		"react-dom": "16.13.1"
 	},
 	"devDependencies": {
-		"@babel/plugin-transform-react-jsx": "^7.12.1",
 		"@testing-library/react-hooks": "^3.4.2",
 		"babel-jest": "^26.6.1",
 		"enzyme": "^3.11.0",
