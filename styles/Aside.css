@@ -13,9 +13,8 @@
 
 .Aside-List-List {
   padding: 0;
-  height: 85%;
-  overflow-y: hidden;
-  scrollbar-width: none;
+  height: 75%;
+  overflow-y: scroll;
 }
 .Aside-List-List > * {
   margin-bottom: 10px;
