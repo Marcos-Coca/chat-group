@@ -23,7 +23,7 @@ export const loginWithFacebook = () => {
 
 export const loginWithEmail = (email) => {
   const actionCodeSettings = {
-    url: 'http://localhost:3000/login/email',
+    url: 'https://chat-group.vercel.app/login/email',
     handleCodeInApp: true
   }
   return firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
