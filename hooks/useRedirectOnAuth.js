@@ -9,7 +9,6 @@ function useRedirectOnAuth() {
   const router = useRouter()
 
   useEffect(() => {
-    console.log(user)
     user && router.replace(`/rooms/${DEFAULT_ROOM}`)
   }, [user])
 

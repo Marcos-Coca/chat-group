@@ -83,7 +83,6 @@ export function getLiveRoomUsers(roomId, callback) {
     .collection('users')
     .onSnapshot(function (snapshot) {
       const users = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      console.log(users)
       callback(users)
     })
 }

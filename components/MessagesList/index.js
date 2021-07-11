@@ -37,7 +37,6 @@ function MessagesList({ roomId }) {
   }, [loading])
 
   useEffect(() => {
-    console.log(showMessageTop)
     showMessageTop && !loading && setPage((prevPage) => prevPage + 1)
   }, [showMessageTop])
 
