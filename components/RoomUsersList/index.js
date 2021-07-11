@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import RoomUser from 'components/RoomUser'
 import { getLiveRoomUsers } from 'services/chat'
 
-function RoomUsersList ({ roomId }) {
+function RoomUsersList({ roomId }) {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
@@ -16,7 +16,7 @@ function RoomUsersList ({ roomId }) {
   }, [])
 
   return (
-    <div className="Aside-List" >
+    <div className="Aside-List">
       <h4 className="Aside-List-Title">Members</h4>
       <ul className="Aside-List-List">
         {users.map((user) => (

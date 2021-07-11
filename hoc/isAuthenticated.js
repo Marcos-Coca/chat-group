@@ -11,7 +11,7 @@ const isAuthenticated = (Page) => (props) => {
   const router = useRouter()
 
   if (props.statusCode && props.statusCode !== 200) {
-    return <Error statusCode={props.statusCode}/>
+    return <Error statusCode={props.statusCode} />
   }
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const isAuthenticated = (Page) => (props) => {
     <>
       {user ? (
         <div className="container">
-          <Aside {...props}/>
+          <Aside {...props} />
           <Page user={user} {...props} />
         </div>
       ) : (
@@ -38,9 +38,10 @@ const isAuthenticated = (Page) => (props) => {
           justify-content: center;
         }
 
-        .container{
-          display:flex;
-          height:100vh;
+        .container {
+          display: flex;
+          height: 100vh;
+          overflow-y: hidden;
         }
       `}</style>
     </>

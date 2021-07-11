@@ -16,7 +16,7 @@ export default css`
   .Hamburger {
     top: 15px;
     left: 30px;
-    display:none;
+    display: none;
     cursor: pointer;
     z-index: 300000;
     position: absolute;
@@ -53,15 +53,15 @@ export default css`
       position: absolute;
       flex-basis: 1 1 90%;
     }
-    .Hamburger{
+    .Hamburger {
       display: inline-block;
     }
-    #btnControl:checked + label{
-      top:10px;
-      left:90%;
-      padding:4px;
-      border-radius:10px;
-      background:var(--third-color);
+    #btnControl:checked + label {
+      top: 10px;
+      left: 90%;
+      padding: 4px;
+      border-radius: 10px;
+      background: var(--third-color);
     }
     #btnControl:checked + label + aside {
       left: 0;

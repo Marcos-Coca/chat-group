@@ -9,7 +9,7 @@ export default css`
     top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: 10%;
     z-index: 300;
     display: flex;
     padding-left: 10%;
@@ -26,10 +26,9 @@ export default css`
     position: relative;
   }
 
-  @media(max-width:765px){
-    .chat-room-top{
-      padding-left:80px;
+  @media (max-width: 765px) {
+    .chat-room-top {
+      padding-left: 80px;
     }
   }
-
 `

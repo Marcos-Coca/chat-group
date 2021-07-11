@@ -5,7 +5,8 @@ import EmailPopUp from 'components/EmailPopUp'
 import { isSignInWithEmailLink, signInWithEmailLink } from 'services/auth'
 
 import useRedirectOnAuth from 'hooks/useRedirectOnAuth'
-function Email () {
+function Email() {
+  // alert("LLEGE")
   useRedirectOnAuth()
   const [email, setEmail] = useState()
   const [tries, setTries] = useState(0)
@@ -21,11 +22,12 @@ function Email () {
   }, [tries])
 
   useEffect(() => {
+    debugger
     const emailStored = window.localStorage.getItem('emailForSignIn')
     setEmail(emailStored)
 
-    if (email) {
-      signInWithEmailLink(email, window.location.href)
+    if (emailStored) {
+      signInWithEmailLink(emailStored, window.location.href)
         .then(() => window.localStorage.removeItem('emailForSignIn'))
         .catch((err) => console.error(err))
     }
@@ -46,7 +48,7 @@ function Email () {
   )
 }
 
-export function getServerSideProps ({ req, res }) {
+export function getServerSideProps({ req, res }) {
   const url = req?.url || window?.location?.href
 
   if (!isSignInWithEmailLink(url)) {

@@ -5,7 +5,7 @@ import { addUserToRoom } from './user'
 
 const db = firebase.firestore()
 
-export function sendMessage ({ roomId, message, user }) {
+export function sendMessage({ roomId, message, user }) {
   const roomRef = db.collection('rooms').doc(roomId).collection('messages')
 
   return roomRef.add({
@@ -15,10 +15,10 @@ export function sendMessage ({ roomId, message, user }) {
   })
 }
 
-export function messagesGetter ({ roomId }) {
+export function messagesGetter({ roomId }) {
   let startAfter = ''
   const limit = window ? Math.round(window.screen.height / 70) : 25
-  function getMessages () {
+  function getMessages() {
     if (startAfter === undefined) return Promise.resolve([])
     return db
       .collection('rooms')
@@ -39,7 +39,7 @@ export function messagesGetter ({ roomId }) {
   return getMessages
 }
 
-function mapMessageFromFirebase (doc) {
+function mapMessageFromFirebase(doc) {
   const id = doc.id
   const data = doc.data()
   const { createdAt } = data
@@ -51,7 +51,7 @@ function mapMessageFromFirebase (doc) {
   }
 }
 
-export function getLiveMessages (roomId, callback) {
+export function getLiveMessages(roomId, callback) {
   return db
     .collection('rooms')
     .doc(roomId)
@@ -63,11 +63,11 @@ export function getLiveMessages (roomId, callback) {
     })
 }
 
-export function getRoom (roomId) {
+export function getRoom(roomId) {
   return db.collection('rooms').doc(roomId).get().then(mapRoomFromFirebase)
 }
 
-function mapRoomFromFirebase (doc) {
+function mapRoomFromFirebase(doc) {
   const id = doc.id
   const room = doc.data()
   return {
@@ -76,18 +76,19 @@ function mapRoomFromFirebase (doc) {
   }
 }
 
-export function getLiveRoomUsers (roomId, callback) {
+export function getLiveRoomUsers(roomId, callback) {
   return db
     .collection('rooms')
     .doc(roomId)
     .collection('users')
     .onSnapshot(function (snapshot) {
       const users = snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      console.log(users)
       callback(users)
     })
 }
 
-export function createRoom ({ user, name, description }) {
+export function createRoom({ user, name, description }) {
   return db
     .collection('rooms')
     .add({
@@ -97,7 +98,7 @@ export function createRoom ({ user, name, description }) {
     .then((roomRef) => addUserToRoom({ user, roomId: roomRef.id }))
 }
 
-export function isUserInRoom ({ userId, roomId }) {
+export function isUserInRoom({ userId, roomId }) {
   return db
     .collection('rooms')
     .doc(roomId)
@@ -107,7 +108,7 @@ export function isUserInRoom ({ userId, roomId }) {
     .then((doc) => doc.exists)
 }
 
-export function searchRoomsByName (name) {
+export function searchRoomsByName(name) {
   return db
     .collection('rooms')
     .where('name', '>=', name)

@@ -24,8 +24,10 @@ export default css`
     width: 40px;
     height: 40px;
     border: none;
+    display: grid;
     cursor: pointer;
     border-radius: 5px;
+    place-items: center;
     background: transparent;
     background: var(--font-main-color);
   }

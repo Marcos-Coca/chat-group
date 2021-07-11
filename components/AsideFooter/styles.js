@@ -5,6 +5,7 @@ export default css`
     height: 10%;
     display: flex;
     background: black;
+    position: relative;
   }
   .Aside-Footer > div {
     width: 80%;

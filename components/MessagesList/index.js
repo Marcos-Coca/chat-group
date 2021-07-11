@@ -8,7 +8,7 @@ import useNearScreen from 'hooks/useNearScreen'
 
 import styles from './styles'
 
-function scrollSetter () {
+function scrollSetter() {
   let oldScroll
   return (loading, element) => {
     if (loading) {
@@ -20,9 +20,9 @@ function scrollSetter () {
   }
 }
 
-function MessagesList ({ roomId }) {
+function MessagesList({ roomId }) {
   const container = useRef(null)
-  const [showMessageTop, messageTopRef] = useNearScreen({})
+  const [showMessageTop, messageTopRef] = useNearScreen({ distance: '300px' })
   const [showMessageEnd, messagesEndRef] = useNearScreen({})
   const { messages, setPage, loading } = useMessages(roomId)
 
@@ -37,6 +37,7 @@ function MessagesList ({ roomId }) {
   }, [loading])
 
   useEffect(() => {
+    console.log(showMessageTop)
     showMessageTop && !loading && setPage((prevPage) => prevPage + 1)
   }, [showMessageTop])
 
@@ -47,8 +48,9 @@ function MessagesList ({ roomId }) {
           <div className="loader">
             <Loader />
           </div>
-        ) : <div ref={messageTopRef} />
-        }
+        ) : (
+          <div style={{ height: 2 }} ref={messageTopRef}></div>
+        )}
       </div>
       {messages.map((message) => (
         <Message key={message.id} message={message} />
